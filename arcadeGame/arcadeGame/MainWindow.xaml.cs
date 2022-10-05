@@ -23,6 +23,9 @@ namespace arcadeGame
         public MainWindow()
         {
             InitializeComponent();
+            GameWindow gw = new GameWindow();
+            gw.Visibility = Visibility.Visible;
+
         }
     }
 }
