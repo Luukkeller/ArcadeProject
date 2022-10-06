@@ -39,11 +39,11 @@ namespace arcadeGame
             gameTimer.Start();
 
             // player 1 image
-            playerSkin.ImageSource = new BitmapImage(new Uri(@"C:\HBO ICT\Projecten\ArcadeProject-main\arcadeGame\arcadeGame\assets\strangerThings1.png"));
+            playerSkin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/strangerThings1.png"));
             player.Fill = playerSkin;
             
             // player 2 image
-            player2Skin.ImageSource = new BitmapImage(new Uri(@"C:\HBO ICT\Projecten\ArcadeProject-main\arcadeGame\arcadeGame\assets\strangerThings2.png"));
+            player2Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/strangerThings2.png"));
             player2.Fill = player2Skin;
 
             Canvas.Focus();
