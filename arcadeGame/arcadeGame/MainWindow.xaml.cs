@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace arcadeGame
 {
@@ -20,20 +22,24 @@ namespace arcadeGame
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Set the Health of the players (they share the same health) and have a variable for damage of player.
+        /// </summary>
+        public int health = 5;
         public MainWindow()
         {
             InitializeComponent();
+            this.Focus();
         }
-        // Set the Health of the players (they share the same health)
 
-        public int Health = 5;
-
-        // when you click the button, you will lose one life
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// this Method will make you lose one life. Once Health reaches 0 you go to game over.
+        /// </summary>
+        public void takeDamage(int playerDamage)
         {
-            Health -= 1;
-            HealthShow.Content = "Health: " + Health;
-            if (Health == 0)
+            health -= playerDamage;
+            healthShow.Content = "Health: " + health;
+            if (health <= 0)
             {
                 GameOver gameOver = new GameOver();
                 gameOver.Show();
@@ -41,12 +47,20 @@ namespace arcadeGame
             }
         }
 
-        // This button will bring you to the Gameover screen without haveing to lose your life. 
-        private void InstaKill_Click(object sender, RoutedEventArgs e)
+
+        /// when you click the button, you will lose one life
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            GameOver gameOver = new GameOver();
-            gameOver.Show();
-            this.Close();
+            takeDamage(1);
+        }
+
+        /// when pressing R. you will go to the Gameover screen without losing your life one by one. 
+        private void onKeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.R)
+            {
+                takeDamage(5);
+            }
         }
     }
 }
