@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:arcadeGame"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Space Invaders" Height="500" Width="800">
+
+    <Canvas Name="Canvas" Focusable="True" Background="Black" KeyDown="KeyPressed" KeyUp="KeyReleased">
+    
+        <Rectangle Name="player" 
+            Fill="White" 
+            Height="66" 
+            Width="56" 
+            Canvas.Left="295" 
+            Canvas.Top="376" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"/>
+
+        <Rectangle Name="player2" 
+            Fill="White" 
+            Height="65" 
+            Width="56" 
+            Canvas.Left="482" 
+            Canvas.Top="376" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Center" 
+            ClipToBounds="True" />
+    </Canvas>
+ 
+
 </Window>
