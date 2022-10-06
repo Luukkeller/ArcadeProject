@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:arcadeGame"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <Canvas Name="GameCanvas" Focusable="True">
+        <Label Name="HealthShow">Health: 5</Label>
+        <Button Canvas.Bottom="12" Canvas.Left="50" Height="40" Width="100" Click="InstaKill_Click">Instakill!!</Button>
+        <Button Canvas.Bottom="12" Canvas.Left="650" Height="40" Click="Button_Click">hit me if you can</Button>
+    </Canvas>
 </Window>

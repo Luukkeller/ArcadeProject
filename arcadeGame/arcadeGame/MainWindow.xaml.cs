@@ -24,5 +24,29 @@ namespace arcadeGame
         {
             InitializeComponent();
         }
+        // Set the Health of the players (they share the same health)
+
+        public int Health = 5;
+
+        // when you click the button, you will lose one life
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Health -= 1;
+            HealthShow.Content = "Health: " + Health;
+            if (Health == 0)
+            {
+                GameOver gameOver = new GameOver();
+                gameOver.Show();
+                this.Close();
+            }
+        }
+
+        // This button will bring you to the Gameover screen without haveing to lose your life. 
+        private void InstaKill_Click(object sender, RoutedEventArgs e)
+        {
+            GameOver gameOver = new GameOver();
+            gameOver.Show();
+            this.Close();
+        }
     }
 }
