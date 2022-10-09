@@ -24,7 +24,8 @@ namespace arcadeGame
     {
         
         bool moveLeft, moveRight, moveLeft2, moveRight2;
-        bool isPressed = false;
+        bool isPressed1 = false;
+        bool isPressed2 = false;
         const int playerSpeed = 10;
         const int bulletSpeed = 10;
         private DispatcherTimer gameTimer = new DispatcherTimer();
@@ -113,9 +114,9 @@ namespace arcadeGame
                 moveRight2 = true;
             }
             //bullet player1
-            if (e.Key == Key.W && !isPressed)
+            if (e.Key == Key.W && !isPressed1)
             {
-                isPressed = true;
+                isPressed1 = true;
                 //create bullet rectangle
                 Rectangle bulletPlayer1 = new Rectangle
                 {
@@ -135,9 +136,9 @@ namespace arcadeGame
             }
 
             //bullet player2
-            if (e.Key == Key.Up && !isPressed)
+            if (e.Key == Key.Up && !isPressed2)
             {
-                isPressed = true;
+                isPressed2 = true;
                 Rectangle bulletPlayer2 = new Rectangle
                 {
                     Tag = "bullet2",
@@ -145,7 +146,6 @@ namespace arcadeGame
                     Width = 5,
                     Fill = Brushes.White,
                 };
-
                 playerBullets.Add(bulletPlayer2);
                 Canvas.SetTop(bulletPlayer2, Canvas.GetTop(player2) - bulletPlayer2.Height);
                 Canvas.SetLeft(bulletPlayer2, Canvas.GetLeft(player2) + player2.Width / 2);
@@ -175,11 +175,12 @@ namespace arcadeGame
             {
                 moveRight2 = false;
             }
-            if (isPressed)
-                isPressed = false;
+            if (isPressed1)
+                isPressed1 = false;
+
+            if (isPressed2)
+                isPressed2 = false;
         }
-
        
-
     }
 }
