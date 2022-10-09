@@ -30,3 +30,21 @@ C:\HBO ICT\Projecten\ArcadeProject-main\arcadeGame\arcadeGame\obj\Debug\arcadeGa
 C:\HBO ICT\Projecten\ArcadeProject-main\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.CoreCompileInputs.cache
 C:\HBO ICT\Projecten\ArcadeProject-main\arcadeGame\arcadeGame\obj\Debug\arcadeGame.exe
 C:\HBO ICT\Projecten\ArcadeProject-main\arcadeGame\arcadeGame\obj\Debug\arcadeGame.pdb
+C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\arcadeGame.exe.config
+C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\arcadeGame.exe
+C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\arcadeGame.pdb
+C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.AssemblyReference.cache
+C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.SuggestedBindingRedirects.cache
+C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\MainWindow.g.cs
+C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\App.g.cs
+C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame_MarkupCompile.cache
+C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame_MarkupCompile.lref
+C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\MainWindow.baml
+C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.g.resources
+C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.Properties.Resources.resources
+C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.GenerateResource.cache
+C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.CoreCompileInputs.cache
+C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.exe
+C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.pdb
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\MainMenu.g.cs
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\MainMenu.baml

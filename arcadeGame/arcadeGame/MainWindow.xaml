@@ -5,29 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:arcadeGame"
         mc:Ignorable="d"
-        Title="Space Invaders" Height="500" Width="800">
+        Title="Space Invaders" Height="450" Width="800">
 
     <Canvas Name="Canvas" Focusable="True" Background="Black" KeyDown="KeyPressed" KeyUp="KeyReleased">
-    
-        <Rectangle Name="player" 
+        <Rectangle Name="player1" 
             Fill="White" 
             Height="66" 
-            Width="56" 
-            Canvas.Left="295" 
-            Canvas.Top="376" 
-            HorizontalAlignment="Left" 
+            Width="47" 
+            Canvas.Left="336" 
+            Canvas.Top="336" 
+            HorizontalAlignment="Center" 
             VerticalAlignment="Top"/>
 
         <Rectangle Name="player2" 
             Fill="White" 
-            Height="65" 
-            Width="56" 
-            Canvas.Left="482" 
-            Canvas.Top="376" 
+            Height="66" 
+            Width="47" 
+            Canvas.Left="424" 
+            Canvas.Top="336" 
             HorizontalAlignment="Left" 
             VerticalAlignment="Center" 
             ClipToBounds="True" />
+
+        <!--<Label Name ="scoreBoard1" Background="White" Canvas.Left="10" Canvas.Top="10" Height="40" Width="122" HorizontalAlignment="Left" VerticalAlignment="Center">
+
+        </Label>
+        <Label Name ="scoreBoard2" Background ="White" Canvas.Left="637" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Center" Height="40" Width="121">
+
+        </Label>-->
     </Canvas>
- 
+
 
 </Window>
