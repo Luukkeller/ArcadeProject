@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:arcadeGame"
         mc:Ignorable="d"
-        Title="NameInput" Height="200" Width="200">
+        Title="NameInput" Height="140" Width="200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" ></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Label x:Name="InputText" Content="Enter Name 1" ></Label>
