@@ -92,7 +92,8 @@ namespace arcadeGame
             Text3.Content = "BotLeft " + (Canvas.GetTop(Player1) + Player1.Height) + "," + Canvas.GetLeft(Player1);
             Text4.Content = "BotRight " + (Canvas.GetTop(Player1) + Player1.Height) + "," + (Canvas.GetLeft(Player1) + Player1.Width);
 
-
+            Text5.Content = Player1.Tag;
+            Text6.Content = Player2.Tag;
 
 
 
