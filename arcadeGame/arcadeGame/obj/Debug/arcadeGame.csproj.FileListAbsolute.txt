@@ -46,5 +46,3 @@ C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeG
 C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.CoreCompileInputs.cache
 C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.exe
 C:\Users\Luuk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.pdb
-C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\MainMenu.g.cs
-C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\MainMenu.baml
