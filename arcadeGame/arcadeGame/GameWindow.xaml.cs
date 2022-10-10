@@ -33,7 +33,7 @@ namespace arcadeGame
         bool isPressed2 = false;
         private const int gameTick = 10;
         private const int playerSpeed = 10;
-
+        int x = 60;
         const int bulletSpeed = 10;
 
 
@@ -68,10 +68,28 @@ namespace arcadeGame
             // player 2 skin
             player2Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/strangerThings2.png"));
             Player2.Fill = player2Skin;
-
-
-
             
+            for(int i = 0; i < 8; i++)
+
+            {
+                Rectangle newEnemy = new Rectangle
+                {
+                    Tag = "enemy",
+                    Height = 45,
+                    Width = 45,
+                    Fill = Brushes.Blue
+                };
+
+                enemies.Add(newEnemy);
+                Canvas.SetTop(newEnemy, 10);
+                Canvas.SetLeft(newEnemy, x);
+                myCanvas.Children.Add(newEnemy);
+                x += 80;
+
+            }
+            
+
+
         }
 
         private void GameEngine(object sender, EventArgs e)
@@ -198,7 +216,7 @@ namespace arcadeGame
                 {
                     bool a = false;
                     bool b = false;
-                    if (Canvas.GetTop(playerBullets[ii]) > (Canvas.GetTop(enemies[i])+ enemies[i].Height))
+                    if (Canvas.GetTop(playerBullets[ii]) < (Canvas.GetTop(enemies[i])+ enemies[i].Height))
                     {
                         a = true;
 
@@ -226,16 +244,9 @@ namespace arcadeGame
                     {
 
                         //Replace this with EnemyTakeDamage(playerBullets[ii] ,enemies[i]) when not in demo mode.
+                        EnemyTakeDamage(playerBullets[ii], enemies[i]);
 
-                        playerBullets[ii].Fill = Brushes.Red;
                     }
-                    //Remove this when not in demo mode
-                    else
-                    {
-                        playerBullets[ii].Fill = Brushes.White;
-                    }
-
-                    //Remove this when not in demo mode
                 }
 
             }
@@ -257,6 +268,7 @@ namespace arcadeGame
             ///Add damage &other code here
             //EnemyDamage(enemy)
             myCanvas.Children.Remove(bullet);
+            myCanvas.Children.Remove(Enemy);
             return;
         }
 
@@ -290,7 +302,7 @@ namespace arcadeGame
                 {
                     Tag = "bullet1",
                     Height = 20,
-                    Width = 5,
+                    Width = 10,
                     Fill = Brushes.White,
                 };
                 //adds player bullet to list
@@ -314,7 +326,7 @@ namespace arcadeGame
                 {
                     Tag = "bullet2",
                     Height = 20,
-                    Width = 5,
+                    Width = 10,
                     Fill = Brushes.White,
                 };
                 playerBullets.Add(bulletPlayer2);
