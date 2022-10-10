@@ -38,3 +38,5 @@ C:\Users\markh\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcade
 C:\Users\markh\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.CoreCompileInputs.cache
 C:\Users\markh\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.exe
 C:\Users\markh\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.pdb
+C:\Users\markh\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\assets\music.mp3
+C:\Users\markh\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame_Content.g.cs

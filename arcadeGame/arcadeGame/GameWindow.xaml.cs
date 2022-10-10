@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Microsoft.Win32;
 
 
 
@@ -37,6 +39,8 @@ namespace arcadeGame
         const int bulletSpeed = 10;
 
 
+        private MediaPlayer mediaPlayer = new MediaPlayer();
+
         ImageBrush player1Skin = new ImageBrush();
         ImageBrush player2Skin = new ImageBrush();
         ///Lists for both enemy bullets and player bullets. We need these to be able to loop over all the bullets in the scene.
@@ -54,6 +58,10 @@ namespace arcadeGame
         public GameWindow()
         {
             InitializeComponent();
+            mediaPlayer.Open(new Uri(@"../../assets/music.mp3", UriKind.RelativeOrAbsolute));
+            mediaPlayer.Play();
+            mediaPlayer.Volume = 0.1f;
+
 
             gameTimer.Interval = TimeSpan.FromMilliseconds(10);
             gameTimer.Tick += GameEngine;
@@ -245,7 +253,7 @@ namespace arcadeGame
 
                         //Replace this with EnemyTakeDamage(playerBullets[ii] ,enemies[i]) when not in demo mode.
                         EnemyTakeDamage(playerBullets[ii], enemies[i]);
-
+                        return;
                     }
                 }
 
@@ -267,6 +275,8 @@ namespace arcadeGame
         {
             ///Add damage &other code here
             //EnemyDamage(enemy)
+            enemies.Remove(Enemy);
+            playerBullets.Remove(bullet);
             myCanvas.Children.Remove(bullet);
             myCanvas.Children.Remove(Enemy);
             return;

@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="GameWindow" Height="460" Width="810">
     <Canvas Name="myCanvas" Focusable="True" Background="HotPink" KeyDown="OnKeyDown" KeyUp="OnKeyUp">
+
+        <MediaElement  Name="mediaElement" 
+     Width="450" Height="250" LoadedBehavior="Manual" UnloadedBehavior="Play" Stretch="Fill"/>
+
         <Rectangle Name="Player1" 
             Fill="White" 
             Height="66" 
