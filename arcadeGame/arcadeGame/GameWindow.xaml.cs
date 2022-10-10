@@ -113,8 +113,7 @@ namespace arcadeGame
             Text5.Content = Player1.Tag;
             Text6.Content = Player2.Tag;
 
-
-
+            
 
             PlayerMovement();
             PlayerHitDetection(Player1);

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:arcadeGame"
         mc:Ignorable="d"
         Title="GameWindow" Height="460" Width="810">
-    <Canvas Name="myCanvas" Focusable="True" Background="HotPink" KeyDown="OnKeyDown" KeyUp="OnKeyUp">
+    <Canvas Name="myCanvas" Focusable="True" Background="Black" KeyDown="OnKeyDown" KeyUp="OnKeyUp">
 
         <MediaElement  Name="mediaElement" 
      Width="450" Height="250" LoadedBehavior="Manual" UnloadedBehavior="Play" Stretch="Fill"/>
@@ -29,13 +29,13 @@
             HorizontalAlignment="Left" 
             VerticalAlignment="Center" 
             ClipToBounds="True" />
-        
+
         <Label x:Name="Text1" Canvas.Top="0" />
         <Label x:Name="Text2" Canvas.Top="10"/>
         <Label x:Name="Text3" Canvas.Top="20"/>
         <Label x:Name="Text4" Canvas.Top="30"/>
-        <Label x:Name="Text5" Canvas.Top="50"/>
-        <Label x:Name="Text6" Canvas.Top="60"/>
+        <Label x:Name="Text5" Content="ppppppp" Canvas.Top="50" Canvas.Left="741" Foreground="Red" HorizontalAlignment="Left" VerticalAlignment="Center"  />
+        <Label x:Name="Text6" Content="ppppppp" Canvas.Top="50" Foreground="Red"  HorizontalAlignment="Left" Canvas.Left="10" VerticalAlignment="Center"/>
 
     </Canvas>
 </Window>
