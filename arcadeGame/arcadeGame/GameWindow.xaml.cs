@@ -21,27 +21,28 @@ namespace arcadeGame
     public partial class GameWindow : Window
     {
         ///Movement keys for player1.
-        private bool P1moveLeft = false;
-        private bool P1moveRight = false;
+        bool moveLeft1, moveRight1, moveLeft2, moveRight2;
 
-
-        //REMOVE THIS IF YOU DONT WANT TO USE IT AS DEMO
-        private bool P1moveUp = false;
-        private bool P1moveDown = false;
-        //REMOVE THIS IF YOU DONT WANT TO USE IT AS DEMO
 
 
 
         /// Game Variables.
         private DispatcherTimer gameTimer = new DispatcherTimer();
+
+        bool isPressed1 = false;
+        bool isPressed2 = false;
         private const int gameTick = 10;
         private const int playerSpeed = 10;
 
+        const int bulletSpeed = 10;
 
 
+        ImageBrush player1Skin = new ImageBrush();
+        ImageBrush player2Skin = new ImageBrush();
         ///Lists for both enemy bullets and player bullets. We need these to be able to loop over all the bullets in the scene.
         private List<Rectangle> enemyBullets = new List<Rectangle>();
         private List<Rectangle> playerBullets = new List<Rectangle>();
+        private List<Rectangle> itemsToRemove = new List<Rectangle>();
 
         ///The List for enemies. This is required for enemy hit detection.
         private List<Rectangle> enemies = new List<Rectangle>();
@@ -60,26 +61,17 @@ namespace arcadeGame
 
             myCanvas.Focus();
 
+            // player 1 skin
+            player1Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/strangerThings1.png"));
+            Player1.Fill = player1Skin;
 
-            //REMOVE THIS IF YOU DONT WANT TO USE IT AS DEMO
+            // player 2 skin
+            player2Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/strangerThings2.png"));
+            Player2.Fill = player2Skin;
 
-            Rectangle newBullet = new Rectangle
-            {
-                Name = "Bullet",
-                Tag = "red",
-                Height = 20,
-                Width = 20,
-                Fill = Brushes.White,
-                Stroke = Brushes.Red
-            };
-            Canvas.SetTop(newBullet, 100 - newBullet.Height);
-            Canvas.SetLeft(newBullet, 100 );
 
-            enemyBullets.Add(newBullet);
 
-            myCanvas.Children.Add(newBullet);
-
-            //REMOVE THIS IF YOU DONT WANT TO USE IT AS DEMO
+            
         }
 
         private void GameEngine(object sender, EventArgs e)
@@ -102,6 +94,21 @@ namespace arcadeGame
             PlayerHitDetection(Player1);
             PlayerHitDetection(Player2);
             EnemyHitDetection();
+
+            //player bullets logic
+            //searches for all rectangles in Canvas
+            foreach (Rectangle x in myCanvas.Children.OfType<Rectangle>())
+            {
+                //filters rectangles with bullet1, bullet2 tags
+                if ((string)x.Tag == "bullet1" || (string)x.Tag == "bullet2")
+                {
+
+                    Canvas.SetTop(x, Canvas.GetTop(x) - bulletSpeed);
+                    Rect bullet = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
+                    if (Canvas.GetTop(x) < 10)
+                        itemsToRemove.Add(x);
+                }
+            }
         }
 
 
@@ -110,21 +117,24 @@ namespace arcadeGame
         ///It stays constrianed to the game window.
         private void PlayerMovement()
         {
-            if (P1moveLeft && Canvas.GetLeft(Player1) > 0)
+            //Player 1
+            if (moveLeft1 == true && Canvas.GetLeft(Player1) > 0)
+            {
                 Canvas.SetLeft(Player1, Canvas.GetLeft(Player1) - playerSpeed);
-
-            if (P1moveRight && Canvas.GetLeft(Player1) + Player1.Width < Application.Current.MainWindow.Width)
+            }
+            if (moveRight1 == true && Canvas.GetLeft(Player1) + 75 < Application.Current.MainWindow.Width)
+            {
                 Canvas.SetLeft(Player1, Canvas.GetLeft(Player1) + playerSpeed);
-
-            //REMOVE THIS IF YOU DONT WANT TO USE IT AS DEMO
-
-            if (P1moveDown && Canvas.GetTop(Player1) + Player1.Height < Application.Current.MainWindow.Height)
-                Canvas.SetTop(Player1, Canvas.GetTop(Player1) + playerSpeed);
-
-            if (P1moveUp && Canvas.GetTop(Player1) > 0)
-                Canvas.SetTop(Player1, Canvas.GetTop(Player1) - playerSpeed);
-
-            //REMOVE THIS IF YOU DONT WANT TO USE IT AS DEMO
+            }
+            // Player 2
+            if (moveLeft2 == true && Canvas.GetLeft(Player2) > 0)
+            {
+                Canvas.SetLeft(Player2, Canvas.GetLeft(Player2) - playerSpeed);
+            }
+            if (moveRight2 == true && Canvas.GetLeft(Player2) + 75 < Application.Current.MainWindow.Width)
+            {
+                Canvas.SetLeft(Player2, Canvas.GetLeft(Player2) + playerSpeed);
+            }
         }
 
 
@@ -253,36 +263,91 @@ namespace arcadeGame
         ///Movement keys.
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
+            //player 1 movement (left or right movement key is pressed)
+            if (e.Key == Key.A)
+            {
+                moveLeft1 = true;
+            }
+            if (e.Key == Key.D)
+            {
+                moveRight1 = true;
+            }
+            //player 2 movement (A or D movement key is pressed)
             if (e.Key == Key.Left)
-                P1moveLeft = true;
+            {
+                moveLeft2 = true;
+            }
             if (e.Key == Key.Right)
-                P1moveRight = true;
+            {
+                moveRight2 = true;
+            }
+            //bullet Player1
+            if (e.Key == Key.W && !isPressed1)
+            {
+                isPressed1 = true;
+                //create bullet rectangle
+                Rectangle bulletPlayer1 = new Rectangle
+                {
+                    Tag = "bullet1",
+                    Height = 20,
+                    Width = 5,
+                    Fill = Brushes.White,
+                };
+                //adds player bullet to list
+                playerBullets.Add(bulletPlayer1);
+                //sets location of bullet above the player vertically
+                Canvas.SetTop(bulletPlayer1, Canvas.GetTop(Player1) - bulletPlayer1.Height);
+                //sets location of bullet above the player horizontally
+                Canvas.SetLeft(bulletPlayer1, Canvas.GetLeft(Player1) + Player1.Width / 2);
+                //adds bullet to game
+                myCanvas.Children.Add(bulletPlayer1);
 
-            //Remove when not in demo mode
-            if (e.Key == Key.Down)
-                P1moveDown = true;
-            if (e.Key == Key.Up)
-                P1moveUp = true;
+                //bullet Player2
+                
 
-            //Remove when not in demo mode
+            }
 
+            if (e.Key == Key.Up && !isPressed2)
+            {
+                isPressed2 = true;
+                Rectangle bulletPlayer2 = new Rectangle
+                {
+                    Tag = "bullet2",
+                    Height = 20,
+                    Width = 5,
+                    Fill = Brushes.White,
+                };
+                playerBullets.Add(bulletPlayer2);
+                Canvas.SetTop(bulletPlayer2, Canvas.GetTop(Player2) - bulletPlayer2.Height);
+                Canvas.SetLeft(bulletPlayer2, Canvas.GetLeft(Player2) + Player2.Width / 2);
+                myCanvas.Children.Add(bulletPlayer2);
+            }
         }
-
         private void OnKeyUp(object sender, KeyEventArgs e)
         {
+            //player 1 movement key is released
+            if (e.Key == Key.A)
+            {
+                moveLeft1 = false;
+            }
+            if (e.Key == Key.D)
+            {
+                moveRight1 = false;
+            }
+            //player 2 movement key is released
             if (e.Key == Key.Left)
-                P1moveLeft = false;
+            {
+                moveLeft2 = false;
+            }
             if (e.Key == Key.Right)
-                P1moveRight = false;
+            {
+                moveRight2 = false;
+            }
+            if (isPressed1)
+                isPressed1 = false;
 
-
-            //Remove when not in demo mode
-            if (e.Key == Key.Down)
-                P1moveDown = false;
-            if (e.Key == Key.Up)
-                P1moveUp = false;
-
-            //Remove when not in demo mode
+            if (isPressed2)
+                isPressed2 = false;
         }
     }
 }

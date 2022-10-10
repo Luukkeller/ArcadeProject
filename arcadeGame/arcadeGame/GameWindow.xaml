@@ -6,25 +6,25 @@
         xmlns:local="clr-namespace:arcadeGame"
         mc:Ignorable="d"
         Title="GameWindow" Height="460" Width="810">
-    <Canvas x:Name="myCanvas"
-            Focusable="True"
-            Background="HotPink"
-            KeyDown="OnKeyDown"
-            KeyUp="OnKeyUp" 
-            Width="800" 
-            Height="450" >
-        <Rectangle x:Name="Player1"
-                   Height="50"
-                   Width="50"
-                   Fill="LightSkyBlue"
-                   Canvas.Left="100"
-                   Canvas.Top="250"/>
-        <Rectangle x:Name="Player2"
-                   Height="50"
-                   Width="50"
-                   Fill="DodgerBlue"
-                   Canvas.Left="400"
-                   Canvas.Top="250"/>
+    <Canvas Name="myCanvas" Focusable="True" Background="HotPink" KeyDown="OnKeyDown" KeyUp="OnKeyUp">
+        <Rectangle Name="Player1" 
+            Fill="White" 
+            Height="66" 
+            Width="47" 
+            Canvas.Left="336" 
+            Canvas.Top="336" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top"/>
+
+        <Rectangle Name="Player2" 
+            Fill="White" 
+            Height="66" 
+            Width="47" 
+            Canvas.Left="424" 
+            Canvas.Top="336" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Center" 
+            ClipToBounds="True" />
         
         <Label x:Name="Text1" Canvas.Top="0" />
         <Label x:Name="Text2" Canvas.Top="10"/>
