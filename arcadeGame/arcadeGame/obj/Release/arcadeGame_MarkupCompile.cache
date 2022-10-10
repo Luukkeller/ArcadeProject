@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Ruwan\Source\Repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\
+C:\Users\Ruwan\Source\Repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\Release\
 arcadeGame
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\Ruwan\Source\Repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\App.xaml
 3718456200
 
-8-1502302872
+7579785746
 13-1310406943
 GameWindow.xaml;MainWindow.xaml;NameInput.xaml;
 
-False
+True
 
