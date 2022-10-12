@@ -38,6 +38,12 @@ namespace arcadeGame
         int x = 60;
         const int bulletSpeed = 10;
 
+        // Spawn enemy variables
+        private Random rand = new Random();
+        private int enemySpawnLimit = 50; // Bepaald de snelheid van het aanmaken van enemies
+        private int enemySpawnCounter = 100;
+        private const int enemySpeed = 10;
+
 
         private MediaPlayer mediaPlayer = new MediaPlayer();
 
@@ -47,6 +53,9 @@ namespace arcadeGame
         private List<Rectangle> enemyBullets = new List<Rectangle>();
         private List<Rectangle> playerBullets = new List<Rectangle>();
         private List<Rectangle> itemsToRemove = new List<Rectangle>();
+
+        //List for spawnEnemies
+        private List<Rectangle> spawnEnemies = new List<Rectangle>();
 
         ///The List for enemies. This is required for enemy hit detection.
         private List<Rectangle> enemies = new List<Rectangle>();
@@ -76,28 +85,73 @@ namespace arcadeGame
             // player 2 skin
             player2Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/strangerThings2.png"));
             Player2.Fill = player2Skin;
+
+            Rect playerHitBox = new Rect(Canvas.GetLeft(Player1), Canvas.GetTop(Player1), Player1.Width, Player1.Height);
+
             
-            for(int i = 0; i < 8; i++)
+
+            //for(int i = 0; i < 8; i++)
+
+            //{
+            //    Rectangle newEnemy = new Rectangle
+            //    {
+            //        Tag = "enemy",
+            //        Height = 45,
+            //        Width = 45,
+            //        Fill = Brushes.Blue
+            //    };
+
+            //    enemies.Add(newEnemy);
+            //    Canvas.SetTop(newEnemy, 10);
+            //    Canvas.SetLeft(newEnemy, x);
+            //    myCanvas.Children.Add(newEnemy);
+            //    x += 80;
+
+            //}
+
+
+
+        }
+
+        private void makeEnemies()
+        {
+
+            ImageBrush enemySprite = new ImageBrush();
+            int enemySpriteCounter = rand.Next(1, 3);
 
             {
+                switch (enemySpriteCounter)
+                {
+                    case 1:
+                        enemySprite.ImageSource =
+                            new BitmapImage(new Uri("pack://application:,,,/assets/invader1.gif"));
+                        break;
+                    case 2:
+                        enemySprite.ImageSource =
+                            new BitmapImage(new Uri("pack://application:,,,/assets/invader2.gif"));
+                        break;
+                    case 3:
+                        enemySprite.ImageSource =
+                            new BitmapImage(new Uri("pack://application:,,,/assets/invader3.gif"));
+                        break;
+                }
+
                 Rectangle newEnemy = new Rectangle
                 {
-                    Tag = "enemy",
+                    Tag = "Enemy",
                     Height = 45,
                     Width = 45,
-                    Fill = Brushes.Blue
+                    Fill = enemySprite
                 };
 
-                enemies.Add(newEnemy);
                 Canvas.SetTop(newEnemy, 10);
                 Canvas.SetLeft(newEnemy, x);
                 myCanvas.Children.Add(newEnemy);
                 x += 80;
 
+                GC.Collect();
             }
             
-
-
         }
 
         private void GameEngine(object sender, EventArgs e)
@@ -133,6 +187,18 @@ namespace arcadeGame
                     if (Canvas.GetTop(x) < 10)
                         itemsToRemove.Add(x);
                 }
+            }
+            
+
+            if (enemySpawnCounter >= 0) //Zorgt ervoor dat er niet negatief wordt doorgeteld.
+            {
+                enemySpawnCounter--;
+            }
+
+            if (enemySpawnCounter < 10 && enemySpawnCounter > 0) //Zorgt ervoor dat er een maximum enemies wordt gespawned.
+            {
+                makeEnemies(); // run make enemies function
+                //enemySpawnCounter = enemySpawnLimit; //reset de enemy counter naar de limit int
             }
         }
 

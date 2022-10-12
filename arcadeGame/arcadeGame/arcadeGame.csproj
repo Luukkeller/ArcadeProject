@@ -113,6 +113,9 @@
     <Resource Include="assets\strangerThings2.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="assets\invader1.gif" />
+    <Resource Include="assets\invader2.gif" />
+    <Resource Include="assets\invader3.gif" />
     <Content Include="assets\music.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
