@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,50 +16,90 @@ using System.Windows.Threading;
 
 namespace arcadeGame
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
-        /// <summary>
-        /// Set the Health of the players (they share the same health) and have a variable for damage of player.
-        /// </summary>
-        public int health = 5;
+        ///Strings for the names
+        public string name1 = "";
+        public string name2 = "";
+
+        bool x = true;
+
+        private DispatcherTimer gameTimer = new DispatcherTimer();
+        private const int gameTick = 10;
+
+
+        NameInput ni;
         public MainWindow()
         {
+
+
+
             InitializeComponent();
-            this.Focus();
+
+            ni = new NameInput(this);
+
+            ///We run a "game engine" so the names on the main window get updated constantly
+            gameTimer.Interval = TimeSpan.FromMilliseconds(10);
+            gameTimer.Tick += GameEngine;
+            gameTimer.Start();
+
+
+
+
         }
 
-        /// <summary>
-        /// this Method will make you lose one life. Once Health reaches 0 you go to game over.
-        /// </summary>
-        public void takeDamage(int playerDamage)
+
+
+        private void GameEngine(object sender, EventArgs e)
         {
-            health -= playerDamage;
-            healthShow.Content = "Health: " + health;
-            if (health <= 0)
+            ///Displays the names of the players on the main window.
+            Text1.Content = "Player 1: " + name1;
+            Text2.Content = "Player 2: " + name2;
+
+            ///This checks if the names have been entered and if not we will ask the players for their names.
+            if (name1 == "")
             {
-                GameOver gameOver = new GameOver();
-                gameOver.Show();
-                this.Close();
+                ///hides the main window so the name input window is clearly visible.
+                this.Visibility = Visibility.Collapsed;
+
+                ///Changes the text on the input window
+                ni.InputText.Content = "Input name of player 1";
+                ni.Activate();
+                ni.Visibility = Visibility.Visible;
+                ///sets the input window on 1 so it changes the name of player 1
+                ni.i = 1;
             }
-        }
-
-
-        /// when you click the button, you will lose one life
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            takeDamage(1);
-        }
-
-        /// when pressing R. you will go to the Gameover screen without losing your life one by one. 
-        private void onKeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.Key == Key.R)
+            ///Checks if the name of player 2 hasnt been filled and if so will ask the players to fill in for player 2
+            else if (name1 != "" && name2 == "")
             {
-                takeDamage(5);
+                this.Visibility = Visibility.Collapsed;
+                ni.i = 2;
+                ni.InputText.Content = "Input name of player 2";
+                ni.Activate();
+                ni.Visibility = Visibility.Visible;
             }
+            ///Makes the main window visible again
+            else if (x)
+            {
+                this.Visibility = Visibility.Visible;
+                x = false;
+            }
+
         }
+
+        ///Starts the game when clicked
+        private void StartClick(object sender, RoutedEventArgs e)
+        {
+
+
+            GameWindow gw = new GameWindow();
+            ///Sets the tags of player 1&2 to their respective names
+            gw.Player1.Tag = name1;
+            gw.Player2.Tag = name2;
+
+            gw.Visibility = Visibility.Visible;
+        }
+
     }
 }

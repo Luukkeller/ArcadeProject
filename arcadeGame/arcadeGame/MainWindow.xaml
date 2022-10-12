@@ -6,8 +6,20 @@
         xmlns:local="clr-namespace:arcadeGame"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Canvas Name="GameCanvas" Focusable="True" KeyDown="onKeyDown">
-        <Label Name="healthShow">Health: 5</Label>
-        <Button Canvas.Bottom="12" Canvas.Left="650" Height="40" Click="Button_Click">hit me if you can</Button>
-    </Canvas>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Button Grid.Column="1" Grid.Row="1" x:Name="Start" Content="Start" Click="StartClick" />
+        <Label Grid.Column="0" Grid.Row="0" x:Name="Text1" Content="" FontSize="30"></Label>
+
+
+        <Label Grid.Column=" 2 " Grid.Row="0" x:Name="Text2" FontSize="30" Content=""></Label>
+    </Grid>
 </Window>
