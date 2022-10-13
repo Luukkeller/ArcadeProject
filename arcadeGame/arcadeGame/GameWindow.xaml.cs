@@ -46,13 +46,13 @@ namespace arcadeGame
         ///Lists for both enemy bullets and player bullets. We need these to be able to loop over all the bullets in the scene.
         private List<Rectangle> enemyBullets = new List<Rectangle>();
         private List<Rectangle> playerBullets = new List<Rectangle>();
-        private List<int> playerDetection = new List<int>(); // Martha: kijken welke player de bullets schiet.
         private List<Rectangle> itemsToRemove = new List<Rectangle>();
 
         ///The List for enemies. This is required for enemy hit detection.
         private List<Rectangle> enemies = new List<Rectangle>();
 
-        // Martha: the list for enemy health and the points for the players.
+        /// Martha: made two ints for player 1 score and player 2 score.
+        private int playerHealth = 3;
         private int player1Score = 0;
         private int player2Score = 0;
 
@@ -86,7 +86,7 @@ namespace arcadeGame
             {
                 Rectangle newEnemy = new Rectangle
                 {
-                    Tag = "enemy",
+                    Tag = "enemyBlue",
                     Height = 45,
                     Width = 45,
                     Fill = Brushes.Blue
@@ -97,6 +97,7 @@ namespace arcadeGame
                 Canvas.SetLeft(newEnemy, x);
                 myCanvas.Children.Add(newEnemy);
                 x += 80;
+
             }
 
 
@@ -202,15 +203,8 @@ namespace arcadeGame
                 if (a && b)
                 {
                     //Replace this with PlayerTakeDamage(enemyBullets[i]) when not in demo mode.
-                    enemyBullets[i].Fill = Brushes.Red;
+                    PlayerTakeDamage(enemyBullets[i]);
                 }
-                //Remove this when not in demo mode
-                else
-                {
-                    enemyBullets[i].Fill = Brushes.White;
-                }
-
-                //Remove this when not in demo mode
             }
         }
 
@@ -266,8 +260,17 @@ namespace arcadeGame
         ///This removes the inserted bullet and executes any other code.
         private void PlayerTakeDamage(Rectangle bullet)
         {
-            ///Add damage &other code here
-            //PlayerDamage()
+            ///Martha: this Method will make you lose one life. Once Health reaches 0 it shows you Game Over.
+            playerHealth -= 1;
+            healthShow.Content = "Health: " + playerHealth;
+
+            if (playerHealth <= 0)
+            {
+                MessageBox.Show("Game over");
+                //gameOver.Show();
+                //this.Hide();
+            }
+
             myCanvas.Children.Remove(bullet);
             return;
         }
@@ -276,43 +279,44 @@ namespace arcadeGame
         ///This removes the inserted bullet and does something with the inserted enemy.
         private void EnemyTakeDamage(Rectangle bullet, Rectangle Enemy)
         {
-            /////Add damage &other code here
-            //EnemyDamage(enemy)
-            //enemies.Remove(Enemy);
-            //playerBullets.Remove(bullet);
-            //myCanvas.Children.Remove(bullet);
-            //myCanvas.Children.Remove(Enemy);
-            //return;
 
-            //Martha: Looking which bullet had which tag and runs the code depending on which bullet tag hits.
+            ///Martha: First it looks at the tag for each of the enemies to assign a temp value for the score
+            ///Looking which bullet had which tag and runs the code depending on which bullet tag hits.
             foreach (Rectangle myBullet in playerBullets)
             {
-                if (myBullet.Tag == "bullet1")
+                int temp;
+                if (Enemy.Tag == "Blue")
                 {
-                    player1Score += 10;
-                    scorePlayer1.Content = "Player 1: " + player1Score;
-                    enemies.Remove(Enemy);
-                    playerBullets.Remove(bullet);
-                    myCanvas.Children.Remove(bullet);
-                    myCanvas.Children.Remove(Enemy);
-                    break;
+                    temp = 10;
+                }
+                else if (Enemy.Tag == "Red")
+                {
+                    temp = 20;
                 }
                 else
                 {
-                    player2Score += 10;
-                    scorePlayer2.Content = "Player 2: " + player2Score;
-                    enemies.Remove(Enemy);
-                    playerBullets.Remove(bullet);
-                    myCanvas.Children.Remove(bullet);
-                    myCanvas.Children.Remove(Enemy);
-                    break;
+                    temp = 50;
                 }
+
+                if (myBullet.Tag == "bullet1")
+                {
+                    player1Score += temp;
+                    scorePlayer1.Content = "Player 1: " + player1Score;
+                }
+                else
+                {
+
+                    player2Score += temp;
+                    scorePlayer2.Content = "Player 2: " + player2Score;
+                }
+                enemies.Remove(Enemy);
+                playerBullets.Remove(bullet);
+                myCanvas.Children.Remove(bullet);
+                myCanvas.Children.Remove(Enemy);
             }
 
 
         }
-
-
 
         ///Movement keys.
         private void OnKeyDown(object sender, KeyEventArgs e)
@@ -405,3 +409,4 @@ namespace arcadeGame
         }
     }
 }
+

@@ -14,5 +14,7 @@ C:\Users\marth\Source\Repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\D
 C:\Users\marth\Source\Repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.CoreCompileInputs.cache
 C:\Users\marth\Source\Repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.exe
 C:\Users\marth\Source\Repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.pdb
-C:\Users\marth\Source\Repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameOver.g.cs
-C:\Users\marth\Source\Repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameOver.baml
+C:\Users\marth\Source\Repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameWindow.g.cs
+C:\Users\marth\Source\Repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\NameInput.g.cs
+C:\Users\marth\Source\Repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameWindow.baml
+C:\Users\marth\Source\Repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\NameInput.baml
