@@ -40,9 +40,8 @@ namespace arcadeGame
 
         // Spawn enemy variables
         private Random rand = new Random();
-        private int enemySpawnLimit = 200; // Bepaald de snelheid van het aanmaken van enemies
-        private int enemySpawnCounter = 0; //Timer voor het spawnen van de enemies
-        private const int enemySpeed = 10; //Snelheid van de enemies
+        private int enemySpawnLimit = 200; //Defines the pace of making the enemys
+        private int enemySpawnCounter = 0; //Timer for spawning of the enemies
         private const int enemyAmount = 9;
         bool spawnRow1 = true;
         bool spawnRow2 = true;
@@ -108,7 +107,7 @@ namespace arcadeGame
         {
             
 
-            if (row == 1) //Defineert de offset van enemies in row 1 voor left en top
+            if (row == 1) //Defines the offset of enemies in row 1 for left and top
             {
                 if (enemyLeft < 1)
 
@@ -117,7 +116,7 @@ namespace arcadeGame
                 }
                 enemyTop = enemyRow1;
             }
-            if (row == 2) //Defineert de offset van enemies in row 2 voor left en top
+            if (row == 2) //Defines the offset of enemies in row 2 for left and top
             {
                 if(enemyLeft < 1)
                 {
@@ -127,11 +126,11 @@ namespace arcadeGame
                 enemyTop = enemyRow2;
             }
 
-            ImageBrush enemySprite = new ImageBrush(); //Weergeeft de enemy
-            int enemySpriteCounter = rand.Next(0, 3); //Kiest random een case uit
+            ImageBrush enemySprite = new ImageBrush(); //Show the enemy
+            int enemySpriteCounter = rand.Next(0, 3); //Chooses random case
             string temp = ""; //Store's color tag
             {
-                switch (enemySpriteCounter) //Kiest de sprite uit en vult de sprite variable met de color tag en vult temp met colors aan
+                switch (enemySpriteCounter) //Chooses sprite and fills sprite variable with color tag and fills temp colors
                 {
                     case 0:
                         enemySprite.ImageSource =
@@ -216,49 +215,49 @@ namespace arcadeGame
             spawnRow1 = true;
             spawnRow2 = true;
             
-            if (enemySpawnCounter > 0) //Zorgt ervoor dat er niet negatief wordt doorgeteld.
+            if (enemySpawnCounter > 0) //Makes sure it doesn't count negative
             {
-                enemySpawnCounter--; //Haalt 1 van timer af
+                enemySpawnCounter--; //Cuts 1 of the timer
             }
 
-            if (enemySpawnCounter == 0) //Deze code wordt gebruikt als de timer klaar is
+            if (enemySpawnCounter == 0) //This code is used when the timer is finished
             {
 
-                foreach (Rectangle newEnemies in enemies) //Loopt door list enemies en doet iets met elke rectangle
+                foreach (Rectangle newEnemies in enemies) //Loops through the list enemies en does something with each rectangle
                 {
 
 
-                    if (Canvas.GetTop(newEnemies) == enemyRow1) //Zitten er geen enemies meer in row1 dan blijft hij true;
+                    if (Canvas.GetTop(newEnemies) == enemyRow1) //If there are no enemies left in row 1 then this stays true
                     {
                         spawnRow1 = false;
                     }
-                    if (Canvas.GetTop(newEnemies) == enemyRow2) //Zitten er geen enemies meer in row2 dan blijft hij true;
+                    if (Canvas.GetTop(newEnemies) == enemyRow2) //If there are no enemies left in row 1 then this stays true
                     {
                         spawnRow2 = false;
                     }
                 }
-                enemyLeft = 0; //reset het plaatsen weer naar 0
+                enemyLeft = 0; //reset placement back to 0
                 
                 {
                     if (spawnRow1)
                     {
-                        for (int i = 0; i < enemyAmount + 1; i++) //Maakt enemyamount enemies aan
+                        for (int i = 0; i < enemyAmount + 1; i++) //makes enemyamount enemys
                             makeEnemies(1);
                     }
                 }
-                enemyLeft = 0; //reset het plaatsen weer naar 0
+                enemyLeft = 0; //reset placement back to 0
                 
                 {
                     if (spawnRow2)
                     {
-                        for (int i = 0; i < enemyAmount; i++) //Maakt enemyamount enemies aan
+                        for (int i = 0; i < enemyAmount; i++) //makes enemyamout enemys
                             makeEnemies(2);
                     }
                 }
 
-                if (spawnRow1 || spawnRow2) //Als row 1 of 2 leeg zijn reset de spawnlimit voor het maken van nieuwe enemies
+                if (spawnRow1 || spawnRow2) //If row1 or row 2 is empty it resets spawnlimit
                 {
-                    enemySpawnCounter = enemySpawnLimit; //reset de enemy counter naar de limit int
+                    enemySpawnCounter = enemySpawnLimit; //Resets the enemy counter back to the spawnlimit
                    
                 }
 
