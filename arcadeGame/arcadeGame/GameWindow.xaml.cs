@@ -35,14 +35,21 @@ namespace arcadeGame
         bool isPressed2 = false;
         private const int gameTick = 10;
         private const int playerSpeed = 10;
-        int x = 60;
+        int enemyLeft = 0;
         const int bulletSpeed = 10;
 
         // Spawn enemy variables
         private Random rand = new Random();
-        private int enemySpawnLimit = 50; // Bepaald de snelheid van het aanmaken van enemies
-        private int enemySpawnCounter = 100;
-        private const int enemySpeed = 10;
+        private int enemySpawnLimit = 100; // Bepaald de snelheid van het aanmaken van enemies
+        private int enemySpawnCounter = 0; //Timer voor het spawnen van de enemies
+        private const int enemySpeed = 10; //Snelheid van de enemies
+        private const int enemyAmount = 9;
+        bool spawnRow1 = true;
+        bool spawnRow2 = true;
+        int enemyRow1 = 10;
+        int enemyRow2 = 60;
+        int enemyTop = 0;
+
 
 
         private MediaPlayer mediaPlayer = new MediaPlayer();
@@ -88,8 +95,10 @@ namespace arcadeGame
 
             Rect playerHitBox = new Rect(Canvas.GetLeft(Player1), Canvas.GetTop(Player1), Player1.Width, Player1.Height);
 
-            
 
+
+            
+            enemyLeft = 0;
             //for(int i = 0; i < 8; i++)
 
             //{
@@ -113,41 +122,69 @@ namespace arcadeGame
 
         }
 
-        private void makeEnemies()
+        private void makeEnemies(int row)
         {
+            
+
+            if (row == 1)
+            {
+                if (enemyLeft < 1)
+
+                {
+                    enemyLeft = 20;
+                }
+                enemyTop = enemyRow1;
+            }
+            if (row == 2 )
+            {
+                if(enemyLeft < 1)
+                {
+                    enemyLeft = 60;
+
+                }
+                enemyTop = enemyRow2;
+            }
 
             ImageBrush enemySprite = new ImageBrush();
-            int enemySpriteCounter = rand.Next(1, 3);
-
+            int enemySpriteCounter = rand.Next(1, 4);
+            string temp = "";
             {
                 switch (enemySpriteCounter)
                 {
                     case 1:
                         enemySprite.ImageSource =
                             new BitmapImage(new Uri("pack://application:,,,/assets/invader1.gif"));
+                        temp = "red";
                         break;
                     case 2:
                         enemySprite.ImageSource =
                             new BitmapImage(new Uri("pack://application:,,,/assets/invader2.gif"));
+                        temp = "green";
                         break;
                     case 3:
                         enemySprite.ImageSource =
                             new BitmapImage(new Uri("pack://application:,,,/assets/invader3.gif"));
+                        temp = "blue";
                         break;
                 }
 
+
+
+
+
                 Rectangle newEnemy = new Rectangle
                 {
-                    Tag = "Enemy",
+                    Tag = temp,
                     Height = 45,
                     Width = 45,
                     Fill = enemySprite
                 };
 
-                Canvas.SetTop(newEnemy, 10);
-                Canvas.SetLeft(newEnemy, x);
+                Canvas.SetTop(newEnemy, enemyTop);
+                Canvas.SetLeft(newEnemy, enemyLeft);
                 myCanvas.Children.Add(newEnemy);
-                x += 80;
+                enemies.Add(newEnemy);
+                enemyLeft += 80;
 
                 GC.Collect();
             }
@@ -167,7 +204,7 @@ namespace arcadeGame
             Text5.Content = Player1.Tag;
             Text6.Content = Player2.Tag;
 
-            
+
 
             PlayerMovement();
             PlayerHitDetection(Player1);
@@ -185,20 +222,63 @@ namespace arcadeGame
                     Canvas.SetTop(x, Canvas.GetTop(x) - bulletSpeed);
                     Rect bullet = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                     if (Canvas.GetTop(x) < 10)
-                        itemsToRemove.Add(x);
+                    {
+                        playerBullets.Remove(x);
+                        myCanvas.Children.Remove(x);
+                        return;
+                    }
+
                 }
             }
-            
 
-            if (enemySpawnCounter >= 0) //Zorgt ervoor dat er niet negatief wordt doorgeteld.
+            spawnRow1 = true;
+            spawnRow2 = true;
+            
+            if (enemySpawnCounter > 0) //Zorgt ervoor dat er niet negatief wordt doorgeteld.
             {
                 enemySpawnCounter--;
             }
 
-            if (enemySpawnCounter < 10 && enemySpawnCounter > 0) //Zorgt ervoor dat er een maximum enemies wordt gespawned.
+            if (enemySpawnCounter == 0) //Zorgt ervoor dat er een maximum enemies wordt gespawned.
             {
-                makeEnemies(); // run make enemies function
-                //enemySpawnCounter = enemySpawnLimit; //reset de enemy counter naar de limit int
+
+                foreach (Rectangle newEnemies in enemies)
+                {
+
+
+                    if (Canvas.GetTop(newEnemies) == enemyRow1)
+                    {
+                        spawnRow1 = false;
+                    }
+                    if (Canvas.GetTop(newEnemies) == enemyRow2)
+                    {
+                        spawnRow2 = false;
+                    }
+                }
+                enemyLeft = 0;
+                for (int i = 0; i < enemyAmount+1; i++)
+                {
+                    if (spawnRow1)
+                    {
+                        makeEnemies(1);
+                    }
+                }
+                enemyLeft = 0;
+                for (int i = 0; i < enemyAmount; i++)
+                {
+                    if (spawnRow2)
+                    {
+                        makeEnemies(2);
+                    }
+                }
+
+                if (spawnRow1 || spawnRow2)
+                {
+                    enemySpawnCounter = enemySpawnLimit; //reset de enemy counter naar de limit int
+                   
+                }
+
+
             }
         }
 
@@ -318,6 +398,9 @@ namespace arcadeGame
 
                         //Replace this with EnemyTakeDamage(playerBullets[ii] ,enemies[i]) when not in demo mode.
                         EnemyTakeDamage(playerBullets[ii], enemies[i]);
+
+                         a = false;
+                         b = false;
                         return;
                     }
                 }
@@ -340,9 +423,9 @@ namespace arcadeGame
         {
             ///Add damage &other code here
             //EnemyDamage(enemy)
-            enemies.Remove(Enemy);
             playerBullets.Remove(bullet);
             myCanvas.Children.Remove(bullet);
+            enemies.Remove(Enemy);
             myCanvas.Children.Remove(Enemy);
             return;
         }
