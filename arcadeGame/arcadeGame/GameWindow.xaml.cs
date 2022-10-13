@@ -73,13 +73,13 @@ namespace arcadeGame
 
             myCanvas.Focus();
 
-            //// player 1 skin
-            //player1Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/strangerThings1.png"));
-            //Player1.Fill = player1Skin;
+            // player 1 skin
+            player1Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/strangerThings1.png"));
+            Player1.Fill = player1Skin;
 
-            //// player 2 skin
-            //player2Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/strangerThings2.png"));
-            //Player2.Fill = player2Skin;
+            // player 2 skin
+            player2Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/strangerThings2.png"));
+            Player2.Fill = player2Skin;
 
             for (int i = 0; i < 8; i++)
 
@@ -202,7 +202,6 @@ namespace arcadeGame
                 /// B = if one of the bottom corners is between Topleft and Topright of the player.
                 if (a && b)
                 {
-                    //Replace this with PlayerTakeDamage(enemyBullets[i]) when not in demo mode.
                     PlayerTakeDamage(enemyBullets[i],1);
                 }
             }
