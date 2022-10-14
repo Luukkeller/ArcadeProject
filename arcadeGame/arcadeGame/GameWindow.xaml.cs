@@ -63,6 +63,11 @@ namespace arcadeGame
         int enemyRow2 = 60;
         int enemyTop = 0;
 
+        /// Martha: made three ints for player 1 score and player 2 score and player health.
+        private int playerHealth = 3;
+        private int player1Score = 0;
+        private int player2Score = 0;
+
 
         public GameWindow()
         {
@@ -317,16 +322,8 @@ namespace arcadeGame
                 /// B = if one of the bottom corners is between Topleft and Topright of the player.
                 if (a && b)
                 {
-                    //Replace this with PlayerTakeDamage(enemyBullets[i]) when not in demo mode.
-                    enemyBullets[i].Fill = Brushes.Red;
+                    PlayerTakeDamage(enemyBullets[i], 1);
                 }
-                    //Remove this when not in demo mode
-                else
-                {
-                    enemyBullets[i].Fill = Brushes.White;
-                }
-
-                    //Remove this when not in demo mode
             }
         }
 
@@ -382,10 +379,22 @@ namespace arcadeGame
         }
 
         ///This removes the inserted bullet and executes any other code.
-        private void PlayerTakeDamage(Rectangle bullet)
-        {   
-            ///Add damage &other code here
-            //PlayerDamage()
+        private void PlayerTakeDamage(Rectangle bullet, int damage)
+        {
+            ///Martha: when player takes damage Health goes down by 1.
+            ///Once playerHealth reaches 0, it will show you Game over.
+            playerHealth -= damage;
+            healthShow.Content = "Health: " + playerHealth;
+
+            if (playerHealth <= 0)
+            {
+                // replace when we have Gameover screen.
+                MessageBox.Show("Game over");
+                //gameOver.Show();
+                //this.Hide();
+            }
+
+            enemyBullets.Remove(bullet);
             myCanvas.Children.Remove(bullet);
             return;
         }
@@ -393,13 +402,41 @@ namespace arcadeGame
         ///This removes the inserted bullet and does something with the inserted enemy.
         private void EnemyTakeDamage(Rectangle bullet, Rectangle Enemy)
         {
-            ///Add damage &other code here
-            //EnemyDamage(enemy)
-            playerBullets.Remove(bullet);
-            myCanvas.Children.Remove(bullet);
-            enemies.Remove(Enemy);
-            myCanvas.Children.Remove(Enemy);
-            return;
+            ///Martha: First it looks at the tag for each of the enemies to assign a temp value for the score
+            ///Looking which bullet had which tag and runs the code depending on which bullet tag hits.
+            ///Added else if for the enemy Temp yellow (temporary value to keep the enemy scores) and the player bullet2
+            foreach (Rectangle myBullet in playerBullets)
+            {
+                int temp = 0;
+                if (Enemy.Tag.ToString() == "blue")
+                {
+                    temp = 10;
+                }
+                else if (Enemy.Tag.ToString() == "green")
+                {
+                    temp = 20;
+                }
+                else if (Enemy.Tag.ToString() == "yellow")
+                {
+                    temp = 50;
+                }
+
+                if (myBullet.Tag.ToString() == "bullet1")
+                {
+                    player1Score += temp;
+                    scorePlayer1.Content = "Player 1: " + player1Score;
+                }
+                else if (myBullet.Tag.ToString() == "bullet2")
+                {
+
+                    player2Score += temp;
+                    scorePlayer2.Content = "Player 2: " + player2Score;
+                }
+                enemies.Remove(Enemy);
+                playerBullets.Remove(bullet);
+                myCanvas.Children.Remove(bullet);
+                myCanvas.Children.Remove(Enemy);
+            }
         }
 
         ///Movement keys.
@@ -464,6 +501,14 @@ namespace arcadeGame
                 Canvas.SetLeft(bulletPlayer2, Canvas.GetLeft(Player2) + Player2.Width / 2);
                 myCanvas.Children.Add(bulletPlayer2);
             }
+
+
+            ///Martha: when you press the Key R on the keyboard it will loop PlayerTakeDamage 3 times and make shows "Game Over"
+            if (e.Key == Key.R)
+            {
+                PlayerTakeDamage(Player1, 3);
+            }
+
         }
         private void OnKeyUp(object sender, KeyEventArgs e)
         {
