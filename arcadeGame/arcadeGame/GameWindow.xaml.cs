@@ -35,9 +35,8 @@ namespace arcadeGame
         bool isPressed2 = false;
         private const int gameTick = 10;
         private const int playerSpeed = 10;
-        int x = 60;
         const int bulletSpeed = 10;
-
+        int enemyLeft = 0;
 
         private MediaPlayer mediaPlayer = new MediaPlayer();
 
@@ -53,6 +52,16 @@ namespace arcadeGame
 
 
 
+        // Spawn enemy variables
+        private Random rand = new Random();
+        private int enemySpawnLimit = 200; //Defines the pace of making the enemys
+        private int enemySpawnCounter = 0; //Timer for spawning of the enemies
+        private const int enemyAmount = 9;
+        bool spawnRow1 = true;
+        bool spawnRow2 = true;
+        int enemyRow1 = 10;
+        int enemyRow2 = 60;
+        int enemyTop = 0;
 
 
         public GameWindow()
@@ -77,24 +86,7 @@ namespace arcadeGame
             player2Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/strangerThings2.png"));
             Player2.Fill = player2Skin;
             
-            for(int i = 0; i < 8; i++)
-
-            {
-                Rectangle newEnemy = new Rectangle
-                {
-                    Tag = "enemy",
-                    Height = 45,
-                    Width = 45,
-                    Fill = Brushes.Blue
-                };
-
-                enemies.Add(newEnemy);
-                Canvas.SetTop(newEnemy, 10);
-                Canvas.SetLeft(newEnemy, x);
-                myCanvas.Children.Add(newEnemy);
-                x += 80;
-
-            }
+            
             
 
 
@@ -131,9 +123,136 @@ namespace arcadeGame
                     Canvas.SetTop(x, Canvas.GetTop(x) - bulletSpeed);
                     Rect bullet = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                     if (Canvas.GetTop(x) < 10)
-                        itemsToRemove.Add(x);
+                    {
+                        playerBullets.Remove(x);
+                        myCanvas.Children.Remove(x);
+                        return;
+
+                    }
                 }
             }
+
+            
+            spawnRow1 = true;
+            spawnRow2 = true;
+
+            if (enemySpawnCounter > 0) //Makes sure it doesn't count negative
+            {
+                enemySpawnCounter--; //Cuts 1 of the timer
+            }
+
+            if (enemySpawnCounter == 0) //This code is used when the timer is finished
+            {
+
+                foreach (Rectangle newEnemies in enemies) //Loops through the list enemies en does something with each rectangle
+                {
+
+
+                    if (Canvas.GetTop(newEnemies) == enemyRow1) //If there are no enemies left in row 1 then this stays true
+                    {
+                        spawnRow1 = false;
+                    }
+                    if (Canvas.GetTop(newEnemies) == enemyRow2) //If there are no enemies left in row 1 then this stays true
+                    {
+                        spawnRow2 = false;
+                    }
+                }
+                enemyLeft = 0; //reset placement back to 0
+
+                {
+                    if (spawnRow1)
+                    {
+                        for (int i = 0; i < enemyAmount + 1; i++) //makes enemyamount enemys
+                            makeEnemies(1);
+                    }
+                }
+                enemyLeft = 0; //reset placement back to 0
+
+                {
+                    if (spawnRow2)
+                    {
+                        for (int i = 0; i < enemyAmount; i++) //makes enemyamout enemys
+                            makeEnemies(2);
+                    }
+                }
+
+                if (spawnRow1 || spawnRow2) //If row1 or row 2 is empty it resets spawnlimit
+                {
+                    enemySpawnCounter = enemySpawnLimit; //Resets the enemy counter back to the spawnlimit
+
+                }
+
+
+            }
+        }
+
+        private void makeEnemies(int row)
+        {
+
+
+            if (row == 1) //Defines the offset of enemies in row 1 for left and top
+            {
+                if (enemyLeft < 1)
+
+                {
+                    enemyLeft = 20;
+                }
+                enemyTop = enemyRow1;
+            }
+            if (row == 2) //Defines the offset of enemies in row 2 for left and top
+            {
+                if (enemyLeft < 1)
+                {
+                    enemyLeft = 60;
+
+                }
+                enemyTop = enemyRow2;
+            }
+
+            ImageBrush enemySprite = new ImageBrush(); //Show the enemy
+            int enemySpriteCounter = rand.Next(0, 3); //Chooses random case
+            string temp = ""; //Store's color tag
+            {
+                switch (enemySpriteCounter) //Chooses sprite and fills sprite variable with color tag and fills temp colors
+                {
+                    case 0:
+                        enemySprite.ImageSource =
+                            new BitmapImage(new Uri("pack://application:,,,/assets/invader1.gif"));
+                        temp = "blue";
+                        break;
+                    case 1:
+                        enemySprite.ImageSource =
+                            new BitmapImage(new Uri("pack://application:,,,/assets/invader2.gif"));
+                        temp = "green";
+                        break;
+                    case 2:
+                        enemySprite.ImageSource =
+                            new BitmapImage(new Uri("pack://application:,,,/assets/invader3.gif"));
+                        temp = "yellow";
+                        break;
+                }
+
+
+
+
+
+                Rectangle newEnemy = new Rectangle //Create rectangle new enemy
+                {
+                    Tag = temp,
+                    Height = 45,
+                    Width = 45,
+                    Fill = enemySprite
+                };
+
+                Canvas.SetTop(newEnemy, enemyTop); //Spawns enemy at this height
+                Canvas.SetLeft(newEnemy, enemyLeft); //Spawns enemy at this left location
+                myCanvas.Children.Add(newEnemy); //Create's the enemy on the canvas
+                enemies.Add(newEnemy); //Adds enemy to the list
+                enemyLeft += 80; //Adds 80 to offset left
+
+                GC.Collect(); //Garbage collection
+            }
+
         }
 
 
@@ -252,6 +371,8 @@ namespace arcadeGame
 
                         //Replace this with EnemyTakeDamage(playerBullets[ii] ,enemies[i]) when not in demo mode.
                         EnemyTakeDamage(playerBullets[ii], enemies[i]);
+                        a = false;
+                        b = false;
                         return;
                     }
                 }
@@ -274,9 +395,9 @@ namespace arcadeGame
         {
             ///Add damage &other code here
             //EnemyDamage(enemy)
-            enemies.Remove(Enemy);
             playerBullets.Remove(bullet);
             myCanvas.Children.Remove(bullet);
+            enemies.Remove(Enemy);
             myCanvas.Children.Remove(Enemy);
             return;
         }
