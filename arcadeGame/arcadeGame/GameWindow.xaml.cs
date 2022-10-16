@@ -405,8 +405,7 @@ namespace arcadeGame
             ///Martha: First it looks at the tag for each of the enemies to assign a temp value for the score
             ///Looking which bullet had which tag and runs the code depending on which bullet tag hits.
             ///Added else if for the enemy Temp yellow (temporary value to keep the enemy scores) and the player bullet2
-            foreach (Rectangle myBullet in playerBullets)
-            {
+            
                 int temp = 0;
                 if (Enemy.Tag.ToString() == "blue")
                 {
@@ -421,22 +420,23 @@ namespace arcadeGame
                     temp = 50;
                 }
 
-                if (myBullet.Tag.ToString() == "bullet1")
+                if (bullet.Tag.ToString() == "bullet1")
                 {
                     player1Score += temp;
                     scorePlayer1.Content = "Player 1: " + player1Score;
                 }
-                else if (myBullet.Tag.ToString() == "bullet2")
+                else if (bullet.Tag.ToString() == "bullet2")
                 {
 
                     player2Score += temp;
                     scorePlayer2.Content = "Player 2: " + player2Score;
                 }
-                enemies.Remove(Enemy);
-                playerBullets.Remove(bullet);
                 myCanvas.Children.Remove(bullet);
                 myCanvas.Children.Remove(Enemy);
-            }
+                enemies.Remove(Enemy);
+                playerBullets.Remove(bullet);
+                return;
+            
         }
 
         ///Movement keys.
