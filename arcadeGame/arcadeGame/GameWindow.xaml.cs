@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Media;
 using System.Net.NetworkInformation;
@@ -23,45 +24,50 @@ namespace arcadeGame
     public partial class GameWindow : Window
     {
         ///Movement keys for player1.
-        bool moveLeft1, moveRight1, moveLeft2, moveRight2;
+        private bool moveLeft1, moveRight1, moveLeft2, moveRight2;
 
-
-
-
+        private int enemyAttackRechargeCooldown = 10;
+        private const int DefaultEnemyAttackRechargeCooldown = 10;
+        private  int enemyAttackTokens = 1;
+        private const int maxEnemyAttackTokens = 5;
+        private const int enemyChance = 10;
         /// Game Variables.
         private DispatcherTimer gameTimer = new DispatcherTimer();
 
-        bool isPressed1 = false;
-        bool isPressed2 = false;
+        private bool isPressed1 = false;
+        private bool isPressed2 = false;
         private const int gameTick = 10;
         private const int playerSpeed = 10;
-        const int bulletSpeed = 10;
-        int enemyLeft = 0;
+        private const int bulletSpeed = 10;
+        private int enemyLeft = 0;
 
         private MediaPlayer mediaPlayer = new MediaPlayer();
 
-        ImageBrush player1Skin = new ImageBrush();
-        ImageBrush player2Skin = new ImageBrush();
+        private ImageBrush player1Skin = new ImageBrush();
+        private ImageBrush player2Skin = new ImageBrush();
         ///Lists for both enemy bullets and player bullets. We need these to be able to loop over all the bullets in the scene.
         private List<Rectangle> enemyBullets = new List<Rectangle>();
         private List<Rectangle> playerBullets = new List<Rectangle>();
         private List<Rectangle> itemsToRemove = new List<Rectangle>();
-
         ///The List for enemies. This is required for enemy hit detection.
         private List<Rectangle> enemies = new List<Rectangle>();
 
 
+        //Dict of shield options and current variable of player shield per player.
+        private Dictionary<int, string> shield = new Dictionary<int, string>();
+        private int player1Shield = 1;
+        private int player2Shield = 1;
 
         // Spawn enemy variables
         private Random rand = new Random();
         private int enemySpawnLimit = 200; //Defines the pace of making the enemys
         private int enemySpawnCounter = 0; //Timer for spawning of the enemies
         private const int enemyAmount = 9;
-        bool spawnRow1 = true;
-        bool spawnRow2 = true;
-        int enemyRow1 = 10;
-        int enemyRow2 = 60;
-        int enemyTop = 0;
+        private bool spawnRow1 = true;
+        private bool spawnRow2 = true;
+        private int enemyRow1 = 10;
+        private int enemyRow2 = 60;
+        private int enemyTop = 0;
 
         /// Martha: made three ints for player 1 score and player 2 score and player health.
         private int playerHealth = 3;
@@ -90,32 +96,68 @@ namespace arcadeGame
             // player 2 skin
             player2Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/strangerThings2.png"));
             Player2.Fill = player2Skin;
-            
-            
-            
+            shield.Add(1, "blue");
+            shield.Add(2, "green");
+            shield.Add(3, "yellow");
+
+
 
 
         }
 
         private void GameEngine(object sender, EventArgs e)
         {
-            //Coordinate Display for player1.
-            //Can be removed
-
-            Text1.Content = "TopLeft " + Canvas.GetTop(Player1) + "," + Canvas.GetLeft(Player1);
-            Text2.Content = "TopRight " + Canvas.GetTop(Player1) + "," + (Canvas.GetLeft(Player1)+Player1.Width);
-            Text3.Content = "BotLeft " + (Canvas.GetTop(Player1) + Player1.Height) + "," + Canvas.GetLeft(Player1);
-            Text4.Content = "BotRight " + (Canvas.GetTop(Player1) + Player1.Height) + "," + (Canvas.GetLeft(Player1) + Player1.Width);
 
             Text5.Content = Player1.Tag;
             Text6.Content = Player2.Tag;
 
-            
+
+            switch (player1Shield) //Chooses sprite and fills sprite variable with color tag and fills temp colors
+            {
+                case 1:
+                    Player1.Stroke = Brushes.Blue;
+                    break;
+                case 2:
+                    Player1.Stroke = Brushes.Green;
+                    break;
+                case 3:
+                    Player1.Stroke = Brushes.Yellow;
+                    break;
+            }
+            switch (player2Shield) //Chooses sprite and fills sprite variable with color tag and fills temp colors
+            {
+                case 1:
+                    Player2.Stroke = Brushes.Blue;
+                    break;
+                case 2:
+                    Player2.Stroke = Brushes.Green;
+                    break;
+                case 3:
+                    Player2.Stroke = Brushes.Yellow;
+                    break;
+            }
+
+
 
             PlayerMovement();
             PlayerHitDetection(Player1);
             PlayerHitDetection(Player2);
             EnemyHitDetection();
+            BulletMovement();
+            EnemyAttacks();
+
+            ///Timer for enemy attack recharge
+            if (enemyAttackRechargeCooldown > 0) //Makes sure it doesn't count negative
+            {
+                enemyAttackRechargeCooldown--; //Cuts 1 of the timer
+            }
+            else
+            {
+                ///adds one to the max attack tokens.
+                enemyAttackRechargeCooldown = DefaultEnemyAttackRechargeCooldown;
+                if(enemyAttackTokens != maxEnemyAttackTokens)
+                    enemyAttackTokens++;
+            }
 
             //player bullets logic
             //searches for all rectangles in Canvas
@@ -126,7 +168,6 @@ namespace arcadeGame
                 {
 
                     Canvas.SetTop(x, Canvas.GetTop(x) - bulletSpeed);
-                    Rect bullet = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                     if (Canvas.GetTop(x) < 10)
                     {
                         playerBullets.Remove(x);
@@ -136,6 +177,10 @@ namespace arcadeGame
                     }
                 }
             }
+
+
+
+
 
             
             spawnRow1 = true;
@@ -168,7 +213,7 @@ namespace arcadeGame
                     if (spawnRow1)
                     {
                         for (int i = 0; i < enemyAmount + 1; i++) //makes enemyamount enemys
-                            makeEnemies(1);
+                            MakeEnemies(1);
                     }
                 }
                 enemyLeft = 0; //reset placement back to 0
@@ -177,7 +222,7 @@ namespace arcadeGame
                     if (spawnRow2)
                     {
                         for (int i = 0; i < enemyAmount; i++) //makes enemyamout enemys
-                            makeEnemies(2);
+                            MakeEnemies(2);
                     }
                 }
 
@@ -187,11 +232,76 @@ namespace arcadeGame
 
                 }
 
+            }
+        }
+
+
+        private void BulletMovement()
+        {
+            for (int i = 0; i < enemyBullets.Count; i++)
+            {
+                ///Just loops over the bullets.
+                Canvas.SetTop(enemyBullets[i],(Canvas.GetTop(enemyBullets[i]) + bulletSpeed/2) );
+                    if (Canvas.GetTop(enemyBullets[i]) > (Canvas.GetTop(Player1) + Player1.Height + enemyBullets[i].Height))
+                    {
+                        enemyBullets.Remove(enemyBullets[i]);
+                        myCanvas.Children.Remove(enemyBullets[i]);
+                        return;
+                    }
 
             }
         }
 
-        private void makeEnemies(int row)
+        private void EnemyAttacks()
+        {
+            ///Pulls a random number to decide to attack or not.
+            ///This basically decides the attack speed of the enemies.
+            int temp = rand.Next(0, enemyChance);
+
+            ///If we have an attack token, the list of enemies is not empty and we pull the right number we start the firing process.
+            if (enemyAttackTokens > 0 && enemies.Count != 0 && temp == 1)
+            {
+                ///pulls a random enemy. 
+                int selectedEnemy = rand.Next(0, (enemies.Count-1)); //Chooses random case
+                SolidColorBrush colour = Brushes.Red;
+
+                ///Depending on the enemies colour we set the colour of the bullet to said colour.
+                switch (enemies[selectedEnemy].Tag) //Chooses sprite and fills sprite variable with color tag and fills temp colors
+                {
+                    case "blue":
+                        colour = Brushes.Blue;
+                        break;
+                    case "green":
+                        colour = Brushes.Green;
+                        break;
+                    case "yellow":
+                        colour = Brushes.Yellow;
+                        break;
+                }
+
+                ///Establishes the bullet.
+                Rectangle bullet = new Rectangle
+                {
+                    ///Sets the tag to the enemy colour
+                    Tag = enemies[selectedEnemy].Tag,
+                    Height = 20,
+                    Width = 10,
+                    Fill = colour,
+                };
+                enemyBullets.Add(bullet);
+                Canvas.SetTop(bullet, Canvas.GetTop(enemies[selectedEnemy]) + enemies[selectedEnemy].Height);
+                Canvas.SetLeft(bullet, Canvas.GetLeft(enemies[selectedEnemy]) + enemies[selectedEnemy].Width / 2);
+                myCanvas.Children.Add(bullet);
+                enemyAttackTokens--;
+            }
+
+
+        }
+
+
+
+
+        private void MakeEnemies(int row)
         {
 
 
@@ -322,7 +432,7 @@ namespace arcadeGame
                 /// B = if one of the bottom corners is between Topleft and Topright of the player.
                 if (a && b)
                 {
-                    PlayerTakeDamage(enemyBullets[i], 1);
+                    PlayerTakeDamage(enemyBullets[i], 1, Player);
                 }
             }
         }
@@ -379,13 +489,27 @@ namespace arcadeGame
         }
 
         ///This removes the inserted bullet and executes any other code.
-        private void PlayerTakeDamage(Rectangle bullet, int damage)
+        private void PlayerTakeDamage(Rectangle bullet, int damage, Rectangle player)
         {
             ///Martha: when player takes damage Health goes down by 1.
             ///Once playerHealth reaches 0, it will show you Game over.
-            playerHealth -= damage;
-            healthShow.Content = "Health: " + playerHealth;
+            ///
 
+            ///Puts the temp value on the shield of player taking potential damage.
+            int temp = 0;
+            if (player.Name.ToString() == "Player1")
+                temp = player1Shield;
+            if (player.Name.ToString() == "Player2")
+                temp = player2Shield;
+
+            ///If the shield doesnt match the bullet take damage. IF it does skip.
+            if (shield[temp] != bullet.Tag.ToString())
+            {
+                playerHealth -= damage;
+                healthShow.Content = "Health: " + playerHealth;
+
+
+            }
             if (playerHealth <= 0)
             {
                 // replace when we have Gameover screen.
@@ -460,6 +584,35 @@ namespace arcadeGame
             {
                 moveRight2 = true;
             }
+
+
+            ///Shield keys
+            ///Player 2
+            if (e.Key == Key.Down)
+            {
+                if (player2Shield == 3)
+                {
+                    player2Shield -= 2;
+                }else
+                {
+                    player2Shield++;
+                }
+            }
+            ///Player 1
+            if (e.Key == Key.S)
+            {
+                if (player1Shield == 3)
+                {
+                    player1Shield -= 2;
+                }
+                else
+                {
+                    player1Shield++;
+                }
+            }
+
+
+
             //bullet Player1
             if (e.Key == Key.W && !isPressed1)
             {
@@ -506,7 +659,7 @@ namespace arcadeGame
             ///Martha: when you press the Key R on the keyboard it will loop PlayerTakeDamage 3 times and make shows "Game Over"
             if (e.Key == Key.R)
             {
-                PlayerTakeDamage(Player1, 3);
+                PlayerTakeDamage(Player1, 3, Player1);
             }
 
         }
