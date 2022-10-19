@@ -107,13 +107,6 @@ namespace arcadeGame
 
         private void GameEngine(object sender, EventArgs e)
         {
-            //Coordinate Display for player1.
-            //Can be removed
-
-            Text1.Content = "TopLeft " + Canvas.GetTop(Player1) + "," + Canvas.GetLeft(Player1);
-            Text2.Content = "TopRight " + Canvas.GetTop(Player1) + "," + (Canvas.GetLeft(Player1)+Player1.Width);
-            Text3.Content = "BotLeft " + (Canvas.GetTop(Player1) + Player1.Height) + "," + Canvas.GetLeft(Player1);
-            Text4.Content = "BotRight " + (Canvas.GetTop(Player1) + Player1.Height) + "," + (Canvas.GetLeft(Player1) + Player1.Width);
 
             Text5.Content = Player1.Tag;
             Text6.Content = Player2.Tag;
@@ -175,7 +168,6 @@ namespace arcadeGame
                 {
 
                     Canvas.SetTop(x, Canvas.GetTop(x) - bulletSpeed);
-                    Rect bullet = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                     if (Canvas.GetTop(x) < 10)
                     {
                         playerBullets.Remove(x);
@@ -185,6 +177,10 @@ namespace arcadeGame
                     }
                 }
             }
+
+
+
+
 
             
             spawnRow1 = true;
@@ -236,7 +232,6 @@ namespace arcadeGame
 
                 }
 
-
             }
         }
 
@@ -247,6 +242,13 @@ namespace arcadeGame
             {
                 ///Just loops over the bullets.
                 Canvas.SetTop(enemyBullets[i],(Canvas.GetTop(enemyBullets[i]) + bulletSpeed/2) );
+                    if (Canvas.GetTop(enemyBullets[i]) > (Canvas.GetTop(Player1) + Player1.Height + enemyBullets[i].Height))
+                    {
+                        enemyBullets.Remove(enemyBullets[i]);
+                        myCanvas.Children.Remove(enemyBullets[i]);
+                        return;
+                    }
+
             }
         }
 
