@@ -244,8 +244,8 @@ namespace arcadeGame
                 Canvas.SetTop(enemyBullets[i],(Canvas.GetTop(enemyBullets[i]) + bulletSpeed/2) );
                     if (Canvas.GetTop(enemyBullets[i]) > (Canvas.GetTop(Player1) + Player1.Height + enemyBullets[i].Height))
                     {
-                        enemyBullets.Remove(enemyBullets[i]);
                         myCanvas.Children.Remove(enemyBullets[i]);
+                        enemyBullets.Remove(enemyBullets[i]);                 
                         return;
                     }
 
