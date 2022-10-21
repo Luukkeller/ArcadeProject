@@ -4,28 +4,17 @@
 winexe
 C#
 .cs
-<<<<<<< HEAD
 C:\Users\Ruwan\source\repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\
-=======
-C:\Users\markh\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\
->>>>>>> origin/Mark1
 arcadeGame
 none
 false
 DEBUG;TRACE
-<<<<<<< HEAD
 C:\Users\Ruwan\source\repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\App.xaml
 3718456200
 1-514054676
 7579785746
-=======
-C:\Users\markh\source\repos\ArcadeProject\arcadeGame\arcadeGame\App.xaml
-4-1261105854
-21949102768
-81666725228
->>>>>>> origin/Mark1
 13-1310406943
-GameOverScreen.xaml;GameWindow.xaml;MainWindow.xaml;NameInput.xaml;
+GameWindow.xaml;MainWindow.xaml;NameInput.xaml;
 
 True
 
