@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Media;
 using System.Net.NetworkInformation;
@@ -11,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -28,7 +30,7 @@ namespace arcadeGame
 
         private int enemyAttackRechargeCooldown = 10;
         private const int DefaultEnemyAttackRechargeCooldown = 10;
-        private  int enemyAttackTokens = 1;
+        private int enemyAttackTokens = 1;
         private const int maxEnemyAttackTokens = 5;
         private const int enemyChance = 10;
         /// Game Variables.
@@ -74,6 +76,8 @@ namespace arcadeGame
         private int player1Score = 0;
         private int player2Score = 0;
 
+        
+
 
         public GameWindow()
         {
@@ -100,14 +104,10 @@ namespace arcadeGame
             shield.Add(2, "green");
             shield.Add(3, "yellow");
 
-
-
-
         }
 
         private void GameEngine(object sender, EventArgs e)
         {
-
             Text5.Content = Player1.Tag;
             Text6.Content = Player2.Tag;
 
@@ -138,7 +138,7 @@ namespace arcadeGame
             }
 
 
-
+           
             PlayerMovement();
             PlayerHitDetection(Player1);
             PlayerHitDetection(Player2);
@@ -155,7 +155,7 @@ namespace arcadeGame
             {
                 ///adds one to the max attack tokens.
                 enemyAttackRechargeCooldown = DefaultEnemyAttackRechargeCooldown;
-                if(enemyAttackTokens != maxEnemyAttackTokens)
+                if (enemyAttackTokens != maxEnemyAttackTokens)
                     enemyAttackTokens++;
             }
 
@@ -182,7 +182,7 @@ namespace arcadeGame
 
 
 
-            
+
             spawnRow1 = true;
             spawnRow2 = true;
 
@@ -241,13 +241,13 @@ namespace arcadeGame
             for (int i = 0; i < enemyBullets.Count; i++)
             {
                 ///Just loops over the bullets.
-                Canvas.SetTop(enemyBullets[i],(Canvas.GetTop(enemyBullets[i]) + bulletSpeed/2) );
-                    if (Canvas.GetTop(enemyBullets[i]) > (Canvas.GetTop(Player1) + Player1.Height + enemyBullets[i].Height))
-                    {
-                        myCanvas.Children.Remove(enemyBullets[i]);
-                        enemyBullets.Remove(enemyBullets[i]);                 
-                        return;
-                    }
+                Canvas.SetTop(enemyBullets[i], (Canvas.GetTop(enemyBullets[i]) + bulletSpeed / 2));
+                if (Canvas.GetTop(enemyBullets[i]) > (Canvas.GetTop(Player1) + Player1.Height + enemyBullets[i].Height))
+                {
+                    myCanvas.Children.Remove(enemyBullets[i]);
+                    enemyBullets.Remove(enemyBullets[i]);
+                    return;
+                }
 
             }
         }
@@ -262,7 +262,7 @@ namespace arcadeGame
             if (enemyAttackTokens > 0 && enemies.Count != 0 && temp == 1)
             {
                 ///pulls a random enemy. 
-                int selectedEnemy = rand.Next(0, (enemies.Count-1)); //Chooses random case
+                int selectedEnemy = rand.Next(0, (enemies.Count - 1)); //Chooses random case
                 SolidColorBrush colour = Brushes.Red;
 
                 ///Depending on the enemies colour we set the colour of the bullet to said colour.
@@ -376,7 +376,7 @@ namespace arcadeGame
         ///It stays constrianed to the game window.
         private void PlayerMovement()
         {
-            //Player 1
+            //Player 1 logic so it can't move outside the game window
             if (moveLeft1 == true && Canvas.GetLeft(Player1) > 0)
             {
                 Canvas.SetLeft(Player1, Canvas.GetLeft(Player1) - playerSpeed);
@@ -385,7 +385,7 @@ namespace arcadeGame
             {
                 Canvas.SetLeft(Player1, Canvas.GetLeft(Player1) + playerSpeed);
             }
-            // Player 2
+            // Player 2 logic so it can't move outside the game window
             if (moveLeft2 == true && Canvas.GetLeft(Player2) > 0)
             {
                 Canvas.SetLeft(Player2, Canvas.GetLeft(Player2) - playerSpeed);
@@ -437,8 +437,8 @@ namespace arcadeGame
             }
         }
 
-       
-        
+
+
         private void EnemyHitDetection()
         {
             ///We loop over the enemies and for each enemy we check if a bullet is hitting it.
@@ -449,7 +449,7 @@ namespace arcadeGame
                 {
                     bool a = false;
                     bool b = false;
-                    if (Canvas.GetTop(playerBullets[ii]) < (Canvas.GetTop(enemies[i])+ enemies[i].Height))
+                    if (Canvas.GetTop(playerBullets[ii]) < (Canvas.GetTop(enemies[i]) + enemies[i].Height))
                     {
                         a = true;
 
@@ -485,7 +485,7 @@ namespace arcadeGame
                 }
 
             }
-                
+
         }
 
         ///This removes the inserted bullet and executes any other code.
@@ -512,8 +512,9 @@ namespace arcadeGame
             }
             if (playerHealth <= 0)
             {
+                AddHighscoreToDatabase(1);
                 // replace when we have Gameover screen.
-                MessageBox.Show("Game over");
+                MessageBox.Show("player1 score = " + player1Score + " " + "player 2 score = " + player2Score);
                 //gameOver.Show();
                 //this.Hide();
             }
@@ -529,38 +530,38 @@ namespace arcadeGame
             ///Martha: First it looks at the tag for each of the enemies to assign a temp value for the score
             ///Looking which bullet had which tag and runs the code depending on which bullet tag hits.
             ///Added else if for the enemy Temp yellow (temporary value to keep the enemy scores) and the player bullet2
-            
-                int temp = 0;
-                if (Enemy.Tag.ToString() == "blue")
-                {
-                    temp = 10;
-                }
-                else if (Enemy.Tag.ToString() == "green")
-                {
-                    temp = 20;
-                }
-                else if (Enemy.Tag.ToString() == "yellow")
-                {
-                    temp = 50;
-                }
 
-                if (bullet.Tag.ToString() == "bullet1")
-                {
-                    player1Score += temp;
-                    scorePlayer1.Content = "Player 1: " + player1Score;
-                }
-                else if (bullet.Tag.ToString() == "bullet2")
-                {
+            int temp = 0;
+            if (Enemy.Tag.ToString() == "blue")
+            {
+                temp = 10;
+            }
+            else if (Enemy.Tag.ToString() == "green")
+            {
+                temp = 20;
+            }
+            else if (Enemy.Tag.ToString() == "yellow")
+            {
+                temp = 50;
+            }
 
-                    player2Score += temp;
-                    scorePlayer2.Content = "Player 2: " + player2Score;
-                }
-                myCanvas.Children.Remove(bullet);
-                myCanvas.Children.Remove(Enemy);
-                enemies.Remove(Enemy);
-                playerBullets.Remove(bullet);
-                return;
-            
+            if (bullet.Tag.ToString() == "bullet1")
+            {
+                player1Score += temp;
+                scorePlayer1.Content = "Player 1: " + player1Score;
+            }
+            else if (bullet.Tag.ToString() == "bullet2")
+            {
+
+                player2Score += temp;
+                scorePlayer2.Content = "Player 2: " + player2Score;
+            }
+            myCanvas.Children.Remove(bullet);
+            myCanvas.Children.Remove(Enemy);
+            enemies.Remove(Enemy);
+            playerBullets.Remove(bullet);
+            return;
+
         }
 
         ///Movement keys.
@@ -593,7 +594,8 @@ namespace arcadeGame
                 if (player2Shield == 3)
                 {
                     player2Shield -= 2;
-                }else
+                }
+                else
                 {
                     player2Shield++;
                 }
@@ -616,7 +618,7 @@ namespace arcadeGame
             //bullet Player1
             if (e.Key == Key.W && !isPressed1)
             {
-                isPressed1 = true;
+                isPressed1 = true; //checks if button is pressed so it doesn't spam bullets
                 //create bullet rectangle
                 Rectangle bulletPlayer1 = new Rectangle
                 {
@@ -635,13 +637,13 @@ namespace arcadeGame
                 myCanvas.Children.Add(bulletPlayer1);
 
                 //bullet Player2
-                
+
 
             }
 
             if (e.Key == Key.Up && !isPressed2)
             {
-                isPressed2 = true;
+                isPressed2 = true; //checks if button is pressed so it doesn't spam bullets
                 Rectangle bulletPlayer2 = new Rectangle
                 {
                     Tag = "bullet2",
@@ -689,5 +691,32 @@ namespace arcadeGame
             if (isPressed2)
                 isPressed2 = false;
         }
+
+        private void AddHighscoreToDatabase(int highscore)
+        {
+
+            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\luukk\\source\\repos\\ArcadeProject\\arcadeGame\\arcadeGame\\data\\GameDataBase.mdf\";Integrated Security=True";
+            string query = "INSERT INTO [Highscores] ([Highscore],[Player],[Date]) VALUES ('" +
+ highscore + "','Jos','" + DateTime.Today + "')";
+
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command = new SqlCommand(query);
+            try
+            {
+                command.CommandText = query;
+                command.CommandType = CommandType.Text;
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                connection.Close();
+            }
+
+        }
+
+
     }
 }

@@ -47,7 +47,6 @@ namespace arcadeGame
         }
 
 
-
         private void GameEngine(object sender, EventArgs e)
         {
             //Once we click the names will be set for the specific player (i).

@@ -64,3 +64,10 @@ C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcade
 C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.CoreCompileInputs.cache
 C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.exe
 C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.pdb
+C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\System.Data.SqlClient.dll
+C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\System.Data.SqlClient.xml
+C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.CopyComplete
+C:\Users\luukk\source\repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\data\GameDataBase.mdf
+C:\Users\luukk\source\repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\data\GameDataBase_log.ldf
+C:\Users\luukk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameOverScreen.g.cs
+C:\Users\luukk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameOverScreen.baml
