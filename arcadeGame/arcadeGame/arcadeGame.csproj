@@ -113,9 +113,22 @@
     <Resource Include="assets\strangerThings2.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="assets\shieldBlue.png" />
+    <Resource Include="assets\shieldGreen.png" />
+    <Resource Include="assets\shieldYellow.png" />
     <Resource Include="assets\invader1.gif" />
     <Resource Include="assets\invader2.gif" />
     <Resource Include="assets\invader3.gif" />
+    <Resource Include="assets\Background.png" />
+    <Resource Include="assets\enemy1.png" />
+    <Resource Include="assets\enemy2.png" />
+    <Resource Include="assets\enemy3.png" />
+    <Resource Include="assets\GameOver.png" />
+    <Resource Include="assets\glowstickBlue.png" />
+    <Resource Include="assets\glowstickGreen.png" />
+    <Resource Include="assets\glowstickWhite.png" />
+    <Resource Include="assets\glowstickYellow.png" />
+    <Resource Include="assets\MainMenu.png" />
     <Content Include="assets\music.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

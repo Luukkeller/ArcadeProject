@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:arcadeGame"
         mc:Ignorable="d"
         Title="GameWindow" Height="460" Width="810">
-    <Canvas Name="myCanvas" Focusable="True" Background="Black" KeyDown="OnKeyDown" KeyUp="OnKeyUp">
+    <Canvas Name="myCanvas" Focusable="True" KeyDown="OnKeyDown" KeyUp="OnKeyUp">
+        <Canvas.Background>
+            <ImageBrush ImageSource="pack://application:,,,/assets/Background.png"></ImageBrush>
+        </Canvas.Background>
 
         <MediaElement  Name="mediaElement" 
      Width="450" Height="250" LoadedBehavior="Manual" UnloadedBehavior="Play" Stretch="Fill"/>
@@ -34,12 +37,12 @@
         <Label x:Name="Text2" Canvas.Top="10"/>
         <Label x:Name="Text3" Canvas.Top="20"/>
         <Label x:Name="Text4" Canvas.Top="30"/>
-        <Label x:Name="Text5" Content="ppppppp" Canvas.Top="50" Canvas.Left="741" Foreground="Red" HorizontalAlignment="Left" VerticalAlignment="Center"  />
-        <Label x:Name="Text6" Content="ppppppp" Canvas.Top="50" Foreground="Red"  HorizontalAlignment="Left" Canvas.Left="10" VerticalAlignment="Center"/>
+        <Label x:Name="Text5" FontFamily="Impact" Content="ppppppp" Canvas.Top="50" Canvas.Left="741" Foreground="Red" HorizontalAlignment="Left" VerticalAlignment="Center"  />
+        <Label x:Name="Text6" FontFamily="Impact" Content="ppppppp" Canvas.Top="50" Foreground="Red"  HorizontalAlignment="Left" Canvas.Left="10" VerticalAlignment="Center"/>
 
-        <Label x:Name="scorePlayer1" Foreground="red" Canvas.Left="10" Canvas.Top="71" HorizontalAlignment="Left" VerticalAlignment="Center">Player 1: 0</Label>
-        <Label x:Name="scorePlayer2" Foreground="red" Canvas.Left="726" Canvas.Top="71" HorizontalAlignment="Left" VerticalAlignment="Center">Player 2: 0</Label>
-        <Label x:Name="healthShow" Foreground="Red" Canvas.Left="376" Canvas.Top="408">Health: 3</Label>
+        <Label x:Name="scorePlayer1" FontFamily="Impact" Foreground="red" Canvas.Left="10" Canvas.Top="71" HorizontalAlignment="Left" VerticalAlignment="Center">Player 1: 0</Label>
+        <Label x:Name="scorePlayer2" FontFamily="Impact" Foreground="red" Canvas.Left="726" Canvas.Top="71" HorizontalAlignment="Left" VerticalAlignment="Center">Player 2: 0</Label>
+        <Label x:Name="healthShow" Foreground="Red" Canvas.Left="376" Canvas.Top="408" FontFamily="Impact">Health: 3</Label>
 
     </Canvas>
 </Window>
