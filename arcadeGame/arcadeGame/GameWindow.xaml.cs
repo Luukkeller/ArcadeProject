@@ -45,6 +45,12 @@ namespace arcadeGame
 
         private ImageBrush player1Skin = new ImageBrush();
         private ImageBrush player2Skin = new ImageBrush();
+
+        ///Martha: Added new brushes for the differend bullet sprites
+        private ImageBrush bulletSkinPlayer = new ImageBrush();
+        private ImageBrush bulletSkinBlue = new ImageBrush();
+        private ImageBrush bulletSkinGreen = new ImageBrush();
+        private ImageBrush bulletSkinYellow = new ImageBrush();
         ///Lists for both enemy bullets and player bullets. We need these to be able to loop over all the bullets in the scene.
         private List<Rectangle> enemyBullets = new List<Rectangle>();
         private List<Rectangle> playerBullets = new List<Rectangle>();
@@ -99,6 +105,12 @@ namespace arcadeGame
             shield.Add(1, "blue");
             shield.Add(2, "green");
             shield.Add(3, "yellow");
+
+            ///Martha Adding the skin for the differend bullets
+            bulletSkinPlayer.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/glowstickWhite.png"));
+            bulletSkinBlue.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/glowstickBlue.png"));
+            bulletSkinGreen.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/glowstickGreen.png"));
+            bulletSkinYellow.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/glowstickYellow.png"));
 
 
 
@@ -263,19 +275,19 @@ namespace arcadeGame
             {
                 ///pulls a random enemy. 
                 int selectedEnemy = rand.Next(0, (enemies.Count-1)); //Chooses random case
-                SolidColorBrush colour = Brushes.Red;
+                Brush colour = Brushes.Red;
 
                 ///Depending on the enemies colour we set the colour of the bullet to said colour.
                 switch (enemies[selectedEnemy].Tag) //Chooses sprite and fills sprite variable with color tag and fills temp colors
                 {
                     case "blue":
-                        colour = Brushes.Blue;
+                        colour = bulletSkinBlue;
                         break;
                     case "green":
-                        colour = Brushes.Green;
+                        colour = bulletSkinGreen;
                         break;
                     case "yellow":
-                        colour = Brushes.Yellow;
+                        colour = bulletSkinYellow;
                         break;
                 }
 
@@ -332,17 +344,17 @@ namespace arcadeGame
                 {
                     case 0:
                         enemySprite.ImageSource =
-                            new BitmapImage(new Uri("pack://application:,,,/assets/invader1.gif"));
+                            new BitmapImage(new Uri("pack://application:,,,/assets/enemy1.png"));
                         temp = "blue";
                         break;
                     case 1:
                         enemySprite.ImageSource =
-                            new BitmapImage(new Uri("pack://application:,,,/assets/invader2.gif"));
+                            new BitmapImage(new Uri("pack://application:,,,/assets/enemy2.png"));
                         temp = "green";
                         break;
                     case 2:
                         enemySprite.ImageSource =
-                            new BitmapImage(new Uri("pack://application:,,,/assets/invader3.gif"));
+                            new BitmapImage(new Uri("pack://application:,,,/assets/enemy3.png"));
                         temp = "yellow";
                         break;
                 }
@@ -623,7 +635,7 @@ namespace arcadeGame
                     Tag = "bullet1",
                     Height = 20,
                     Width = 10,
-                    Fill = Brushes.White,
+                    Fill = bulletSkinPlayer,
                 };
                 //adds player bullet to list
                 playerBullets.Add(bulletPlayer1);
@@ -647,7 +659,7 @@ namespace arcadeGame
                     Tag = "bullet2",
                     Height = 20,
                     Width = 10,
-                    Fill = Brushes.White,
+                    Fill = bulletSkinPlayer,
                 };
                 playerBullets.Add(bulletPlayer2);
                 Canvas.SetTop(bulletPlayer2, Canvas.GetTop(Player2) - bulletPlayer2.Height);
