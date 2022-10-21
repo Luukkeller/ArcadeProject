@@ -4,6 +4,10 @@
     "\\arcadeGame",
     "\\arcadeGame\\arcadeGame"
   ],
+<<<<<<< HEAD
   "SelectedNode": "\\arcadeGame\\arcadeGame\\GameWindow.xaml.cs",
+=======
+  "SelectedNode": "\\arcadeGame.sln",
+>>>>>>> origin/Mark1
   "PreviewInSolutionExplorer": false
 }

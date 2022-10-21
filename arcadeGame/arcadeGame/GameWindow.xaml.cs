@@ -83,6 +83,11 @@ namespace arcadeGame
 
         public GameWindow()
         {
+            //SoundPlayerAction soundPlayerAction = new SoundPlayerAction();
+            //soundPlayerAction.Source = new Uri(@"../../assets/Enemyhit.mp3", UriKind.RelativeOrAbsolute);
+            //EventTrigger eventTrigger = new EventTrigger(EnemyHitDetection); // this is the event you want to trigger the sound effect.
+            //eventTrigger.Actions.Add(soundPlayerAction);
+
             InitializeComponent();
             mediaPlayer.Open(new Uri(@"../../assets/music.mp3", UriKind.RelativeOrAbsolute));
             mediaPlayer.Play();
@@ -700,6 +705,11 @@ namespace arcadeGame
 
             if (isPressed2)
                 isPressed2 = false;
+        }
+
+        private void GameOverScreen()
+        {
+
         }
     }
 }

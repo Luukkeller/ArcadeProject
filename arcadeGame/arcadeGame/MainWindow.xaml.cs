@@ -101,5 +101,9 @@ namespace arcadeGame
             gw.Visibility = Visibility.Visible;
         }
 
+        private void QuitClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
