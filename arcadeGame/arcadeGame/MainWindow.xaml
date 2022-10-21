@@ -16,10 +16,11 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="1" Grid.Row="1" x:Name="Start" Content="Start" Click="StartClick" />
+        <Button Grid.Column="1" x:Name="Start" Content="Start" Click="StartClick" Margin="0,217,0,172" Grid.RowSpan="2" FontSize="20" />
         <Label Grid.Column="0" Grid.Row="0" x:Name="Text1" Content="" FontSize="30"></Label>
-
-
         <Label Grid.Column=" 2 " Grid.Row="0" x:Name="Text2" FontSize="30" Content=""></Label>
+        <Button Grid.Column="1" x:Name="High_Scores" Content="High Scores" Margin="0,63,0,108" Grid.Row="1" FontSize="20" />
+        <Button Grid.Column="1" x:Name="Quit" Content="Quit" Click="QuitClick" Margin="0,127,0,45" Grid.Row="1" FontSize="20" />
+        <TextBlock HorizontalAlignment="Center" FontSize="35" Height="40" Margin="0,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="266" Grid.Column="1"><Run Text="Strange "/><Run Text="Invaders"/></TextBlock>
     </Grid>
 </Window>

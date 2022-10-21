@@ -35,8 +35,22 @@ namespace arcadeGame
         bool isPressed2 = false;
         private const int gameTick = 10;
         private const int playerSpeed = 10;
-        int enemyLeft = 0;
         const int bulletSpeed = 10;
+        int enemyLeft = 0;
+
+        private MediaPlayer mediaPlayer = new MediaPlayer();
+
+        ImageBrush player1Skin = new ImageBrush();
+        ImageBrush player2Skin = new ImageBrush();
+        ///Lists for both enemy bullets and player bullets. We need these to be able to loop over all the bullets in the scene.
+        private List<Rectangle> enemyBullets = new List<Rectangle>();
+        private List<Rectangle> playerBullets = new List<Rectangle>();
+        private List<Rectangle> itemsToRemove = new List<Rectangle>();
+
+        ///The List for enemies. This is required for enemy hit detection.
+        private List<Rectangle> enemies = new List<Rectangle>();
+
+
 
         // Spawn enemy variables
         private Random rand = new Random();
@@ -49,29 +63,19 @@ namespace arcadeGame
         int enemyRow2 = 60;
         int enemyTop = 0;
 
-
-
-        private MediaPlayer mediaPlayer = new MediaPlayer();
-
-        ImageBrush player1Skin = new ImageBrush();
-        ImageBrush player2Skin = new ImageBrush();
-        ///Lists for both enemy bullets and player bullets. We need these to be able to loop over all the bullets in the scene.
-        private List<Rectangle> enemyBullets = new List<Rectangle>();
-        private List<Rectangle> playerBullets = new List<Rectangle>();
-        private List<Rectangle> itemsToRemove = new List<Rectangle>();
-
-        //List for spawnEnemies
-        private List<Rectangle> spawnEnemies = new List<Rectangle>();
-
-        ///The List for enemies. This is required for enemy hit detection.
-        private List<Rectangle> enemies = new List<Rectangle>();
-
-
-
+        /// Martha: made three ints for player 1 score and player 2 score and player health.
+        private int playerHealth = 3;
+        private int player1Score = 0;
+        private int player2Score = 0;
 
 
         public GameWindow()
         {
+            //SoundPlayerAction soundPlayerAction = new SoundPlayerAction();
+            //soundPlayerAction.Source = new Uri(@"../../assets/Enemyhit.mp3", UriKind.RelativeOrAbsolute);
+            //EventTrigger eventTrigger = new EventTrigger(EnemyHitDetection); // this is the event you want to trigger the sound effect.
+            //eventTrigger.Actions.Add(soundPlayerAction);
+
             InitializeComponent();
             mediaPlayer.Open(new Uri(@"../../assets/music.mp3", UriKind.RelativeOrAbsolute));
             mediaPlayer.Play();
@@ -91,21 +95,110 @@ namespace arcadeGame
             // player 2 skin
             player2Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/strangerThings2.png"));
             Player2.Fill = player2Skin;
-
-            Rect playerHitBox = new Rect(Canvas.GetLeft(Player1), Canvas.GetTop(Player1), Player1.Width, Player1.Height);
-
-
-
             
             
-
+            
 
 
         }
 
+        private void GameEngine(object sender, EventArgs e)
+        {
+            //Coordinate Display for player1.
+            //Can be removed
+
+            Text1.Content = "TopLeft " + Canvas.GetTop(Player1) + "," + Canvas.GetLeft(Player1);
+            Text2.Content = "TopRight " + Canvas.GetTop(Player1) + "," + (Canvas.GetLeft(Player1)+Player1.Width);
+            Text3.Content = "BotLeft " + (Canvas.GetTop(Player1) + Player1.Height) + "," + Canvas.GetLeft(Player1);
+            Text4.Content = "BotRight " + (Canvas.GetTop(Player1) + Player1.Height) + "," + (Canvas.GetLeft(Player1) + Player1.Width);
+
+            Text5.Content = Player1.Tag;
+            Text6.Content = Player2.Tag;
+
+            
+
+            PlayerMovement();
+            PlayerHitDetection(Player1);
+            PlayerHitDetection(Player2);
+            EnemyHitDetection();
+
+            //player bullets logic
+            //searches for all rectangles in Canvas
+            foreach (Rectangle x in myCanvas.Children.OfType<Rectangle>())
+            {
+                //filters rectangles with bullet1, bullet2 tags
+                if ((string)x.Tag == "bullet1" || (string)x.Tag == "bullet2")
+                {
+
+                    Canvas.SetTop(x, Canvas.GetTop(x) - bulletSpeed);
+                    Rect bullet = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
+                    if (Canvas.GetTop(x) < 10)
+                    {
+                        playerBullets.Remove(x);
+                        myCanvas.Children.Remove(x);
+                        return;
+
+                    }
+                }
+            }
+
+            
+            spawnRow1 = true;
+            spawnRow2 = true;
+
+            if (enemySpawnCounter > 0) //Makes sure it doesn't count negative
+            {
+                enemySpawnCounter--; //Cuts 1 of the timer
+            }
+
+            if (enemySpawnCounter == 0) //This code is used when the timer is finished
+            {
+
+                foreach (Rectangle newEnemies in enemies) //Loops through the list enemies en does something with each rectangle
+                {
+
+
+                    if (Canvas.GetTop(newEnemies) == enemyRow1) //If there are no enemies left in row 1 then this stays true
+                    {
+                        spawnRow1 = false;
+                    }
+                    if (Canvas.GetTop(newEnemies) == enemyRow2) //If there are no enemies left in row 1 then this stays true
+                    {
+                        spawnRow2 = false;
+                    }
+                }
+                enemyLeft = 0; //reset placement back to 0
+
+                {
+                    if (spawnRow1)
+                    {
+                        for (int i = 0; i < enemyAmount + 1; i++) //makes enemyamount enemys
+                            makeEnemies(1);
+                    }
+                }
+                enemyLeft = 0; //reset placement back to 0
+
+                {
+                    if (spawnRow2)
+                    {
+                        for (int i = 0; i < enemyAmount; i++) //makes enemyamout enemys
+                            makeEnemies(2);
+                    }
+                }
+
+                if (spawnRow1 || spawnRow2) //If row1 or row 2 is empty it resets spawnlimit
+                {
+                    enemySpawnCounter = enemySpawnLimit; //Resets the enemy counter back to the spawnlimit
+
+                }
+
+
+            }
+        }
+
         private void makeEnemies(int row)
         {
-            
+
 
             if (row == 1) //Defines the offset of enemies in row 1 for left and top
             {
@@ -118,7 +211,7 @@ namespace arcadeGame
             }
             if (row == 2) //Defines the offset of enemies in row 2 for left and top
             {
-                if(enemyLeft < 1)
+                if (enemyLeft < 1)
                 {
                     enemyLeft = 60;
 
@@ -135,7 +228,7 @@ namespace arcadeGame
                     case 0:
                         enemySprite.ImageSource =
                             new BitmapImage(new Uri("pack://application:,,,/assets/invader1.gif"));
-                        temp = "red";
+                        temp = "blue";
                         break;
                     case 1:
                         enemySprite.ImageSource =
@@ -169,100 +262,7 @@ namespace arcadeGame
 
                 GC.Collect(); //Garbage collection
             }
-            
-        }
 
-        private void GameEngine(object sender, EventArgs e)
-        {
-            //Coordinate Display for player1.
-            //Can be removed
-
-            Text1.Content = "TopLeft " + Canvas.GetTop(Player1) + "," + Canvas.GetLeft(Player1);
-            Text2.Content = "TopRight " + Canvas.GetTop(Player1) + "," + (Canvas.GetLeft(Player1)+Player1.Width);
-            Text3.Content = "BotLeft " + (Canvas.GetTop(Player1) + Player1.Height) + "," + Canvas.GetLeft(Player1);
-            Text4.Content = "BotRight " + (Canvas.GetTop(Player1) + Player1.Height) + "," + (Canvas.GetLeft(Player1) + Player1.Width);
-
-            Text5.Content = Player1.Tag;
-            Text6.Content = Player2.Tag;
-
-
-
-            PlayerMovement();
-            PlayerHitDetection(Player1);
-            PlayerHitDetection(Player2);
-            EnemyHitDetection();
-
-            //player bullets logic
-            //searches for all rectangles in Canvas
-            foreach (Rectangle x in myCanvas.Children.OfType<Rectangle>())
-            {
-                //filters rectangles with bullet1, bullet2 tags
-                if ((string)x.Tag == "bullet1" || (string)x.Tag == "bullet2")
-                {
-
-                    Canvas.SetTop(x, Canvas.GetTop(x) - bulletSpeed);
-                    Rect bullet = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
-                    if (Canvas.GetTop(x) < 10)
-                    {
-                        playerBullets.Remove(x);
-                        myCanvas.Children.Remove(x);
-                        return;
-                    }
-
-                }
-            }
-
-            spawnRow1 = true;
-            spawnRow2 = true;
-            
-            if (enemySpawnCounter > 0) //Makes sure it doesn't count negative
-            {
-                enemySpawnCounter--; //Cuts 1 of the timer
-            }
-
-            if (enemySpawnCounter == 0) //This code is used when the timer is finished
-            {
-
-                foreach (Rectangle newEnemies in enemies) //Loops through the list enemies en does something with each rectangle
-                {
-
-
-                    if (Canvas.GetTop(newEnemies) == enemyRow1) //If there are no enemies left in row 1 then this stays true
-                    {
-                        spawnRow1 = false;
-                    }
-                    if (Canvas.GetTop(newEnemies) == enemyRow2) //If there are no enemies left in row 1 then this stays true
-                    {
-                        spawnRow2 = false;
-                    }
-                }
-                enemyLeft = 0; //reset placement back to 0
-                
-                {
-                    if (spawnRow1)
-                    {
-                        for (int i = 0; i < enemyAmount + 1; i++) //makes enemyamount enemys
-                            makeEnemies(1);
-                    }
-                }
-                enemyLeft = 0; //reset placement back to 0
-                
-                {
-                    if (spawnRow2)
-                    {
-                        for (int i = 0; i < enemyAmount; i++) //makes enemyamout enemys
-                            makeEnemies(2);
-                    }
-                }
-
-                if (spawnRow1 || spawnRow2) //If row1 or row 2 is empty it resets spawnlimit
-                {
-                    enemySpawnCounter = enemySpawnLimit; //Resets the enemy counter back to the spawnlimit
-                   
-                }
-
-
-            }
         }
 
 
@@ -327,16 +327,8 @@ namespace arcadeGame
                 /// B = if one of the bottom corners is between Topleft and Topright of the player.
                 if (a && b)
                 {
-                    //Replace this with PlayerTakeDamage(enemyBullets[i]) when not in demo mode.
-                    enemyBullets[i].Fill = Brushes.Red;
+                    PlayerTakeDamage(enemyBullets[i], 1);
                 }
-                    //Remove this when not in demo mode
-                else
-                {
-                    enemyBullets[i].Fill = Brushes.White;
-                }
-
-                    //Remove this when not in demo mode
             }
         }
 
@@ -381,9 +373,8 @@ namespace arcadeGame
 
                         //Replace this with EnemyTakeDamage(playerBullets[ii] ,enemies[i]) when not in demo mode.
                         EnemyTakeDamage(playerBullets[ii], enemies[i]);
-
-                         a = false;
-                         b = false;
+                        a = false;
+                        b = false;
                         return;
                     }
                 }
@@ -393,10 +384,22 @@ namespace arcadeGame
         }
 
         ///This removes the inserted bullet and executes any other code.
-        private void PlayerTakeDamage(Rectangle bullet)
-        {   
-            ///Add damage &other code here
-            //PlayerDamage()
+        private void PlayerTakeDamage(Rectangle bullet, int damage)
+        {
+            ///Martha: when player takes damage Health goes down by 1.
+            ///Once playerHealth reaches 0, it will show you Game over.
+            playerHealth -= damage;
+            healthShow.Content = "Health: " + playerHealth;
+
+            if (playerHealth <= 0)
+            {
+                // replace when we have Gameover screen.
+                MessageBox.Show("Game over");
+                //gameOver.Show();
+                //this.Hide();
+            }
+
+            enemyBullets.Remove(bullet);
             myCanvas.Children.Remove(bullet);
             return;
         }
@@ -404,13 +407,41 @@ namespace arcadeGame
         ///This removes the inserted bullet and does something with the inserted enemy.
         private void EnemyTakeDamage(Rectangle bullet, Rectangle Enemy)
         {
-            ///Add damage &other code here
-            //EnemyDamage(enemy)
-            playerBullets.Remove(bullet);
-            myCanvas.Children.Remove(bullet);
-            enemies.Remove(Enemy);
-            myCanvas.Children.Remove(Enemy);
-            return;
+            ///Martha: First it looks at the tag for each of the enemies to assign a temp value for the score
+            ///Looking which bullet had which tag and runs the code depending on which bullet tag hits.
+            ///Added else if for the enemy Temp yellow (temporary value to keep the enemy scores) and the player bullet2
+            
+                int temp = 0;
+                if (Enemy.Tag.ToString() == "blue")
+                {
+                    temp = 10;
+                }
+                else if (Enemy.Tag.ToString() == "green")
+                {
+                    temp = 20;
+                }
+                else if (Enemy.Tag.ToString() == "yellow")
+                {
+                    temp = 50;
+                }
+
+                if (bullet.Tag.ToString() == "bullet1")
+                {
+                    player1Score += temp;
+                    scorePlayer1.Content = "Player 1: " + player1Score;
+                }
+                else if (bullet.Tag.ToString() == "bullet2")
+                {
+
+                    player2Score += temp;
+                    scorePlayer2.Content = "Player 2: " + player2Score;
+                }
+                myCanvas.Children.Remove(bullet);
+                myCanvas.Children.Remove(Enemy);
+                enemies.Remove(Enemy);
+                playerBullets.Remove(bullet);
+                return;
+            
         }
 
         ///Movement keys.
@@ -475,6 +506,14 @@ namespace arcadeGame
                 Canvas.SetLeft(bulletPlayer2, Canvas.GetLeft(Player2) + Player2.Width / 2);
                 myCanvas.Children.Add(bulletPlayer2);
             }
+
+
+            ///Martha: when you press the Key R on the keyboard it will loop PlayerTakeDamage 3 times and make shows "Game Over"
+            if (e.Key == Key.R)
+            {
+                PlayerTakeDamage(Player1, 3);
+            }
+
         }
         private void OnKeyUp(object sender, KeyEventArgs e)
         {
@@ -501,6 +540,11 @@ namespace arcadeGame
 
             if (isPressed2)
                 isPressed2 = false;
+        }
+
+        private void GameOverScreen()
+        {
+
         }
     }
 }
