@@ -13,7 +13,7 @@
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <Label x:Name="InputText" Content="Enter Name 1" ></Label>
-        <TextBox Grid.Row="1" Margin="5" x:Name="Input1" Background="AliceBlue" IsEnabled="True" >
+        <TextBox Grid.Row="1" Margin="5" x:Name="Input1" Background="AliceBlue" IsEnabled="True" UndoLimit="10" Cursor="Pen" MaxLength="10" >
             <TextBox.Effect>
                 <DropShadowEffect/>
             </TextBox.Effect>

@@ -30,10 +30,10 @@
             VerticalAlignment="Center" 
             ClipToBounds="True" />
 
-        <Label x:Name="Text1" Canvas.Top="0" />
-        <Label x:Name="Text2" Canvas.Top="10"/>
-        <Label x:Name="Text3" Canvas.Top="20"/>
-        <Label x:Name="Text4" Canvas.Top="30"/>
+        <Label x:Name="Text1" Canvas.Top="0" Foreground="#FFF93636" />
+        <Label x:Name="Text2" Canvas.Top="192" Foreground="#FFF93636" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label x:Name="Text3" Canvas.Top="253" Foreground="#FFF93636" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label x:Name="Text4" Canvas.Top="30" Foreground="#FFF93636"/>
         <Label x:Name="Text5" Content="ppppppp" Canvas.Top="408" Canvas.Left="630" Foreground="Red" HorizontalAlignment="Left" VerticalAlignment="Top"  />
         <Label x:Name="Text6" Content="ppppppp" Canvas.Top="408" Foreground="Red"  HorizontalAlignment="Left" Canvas.Left="40" VerticalAlignment="Top"/>
 

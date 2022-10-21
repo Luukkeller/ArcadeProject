@@ -512,7 +512,8 @@ namespace arcadeGame
             }
             if (playerHealth <= 0)
             {
-                AddHighscoreToDatabase(1);
+                AddHighscoreToDatabase(player1Score, Player1.Tag.ToString());
+                AddHighscoreToDatabase(player2Score, Player2.Tag.ToString());
                 // replace when we have Gameover screen.
                 MessageBox.Show("player1 score = " + player1Score + " " + "player 2 score = " + player2Score);
                 //gameOver.Show();
@@ -692,26 +693,47 @@ namespace arcadeGame
                 isPressed2 = false;
         }
 
-        private void AddHighscoreToDatabase(int highscore)
+        private void AddHighscoreToDatabase(int highscore, string playername)
         {
-
-            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\luukk\\source\\repos\\ArcadeProject\\arcadeGame\\arcadeGame\\data\\GameDataBase.mdf\";Integrated Security=True";
-            string query = "INSERT INTO [Highscores] ([Highscore],[Player],[Date]) VALUES ('" +
- highscore + "','Jos','" + DateTime.Today + "')";
+            string temp = highscore.ToString() + "','Jos','je moeke')";
+            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\Ruwan\\source\\repos\\Luukkeller\\ArcadeProject\\arcadeGame\\arcadeGame\\data\\GameDataBase.mdf\";Integrated Security=True";
+            string query = "INSERT INTO [Highscores] ([Highscore],[Player],[Date]) VALUES ('"+highscore+"','"+playername+"','Vandaag')";
 
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(query);
+
+
             try
             {
                 command.CommandText = query;
+
+                Text3.Content = "Command erin gegooied";
                 command.CommandType = CommandType.Text;
+
+
+
+                Text3.Content = "command type gezet";
                 command.Connection = connection;
+
+                Text3.Content = "Connectie aangewezen";
+
+                Text2.Content = connection.State.ToString();
                 connection.Open();
+
+                Text2.Content = connection.State.ToString();
+                Text3.Content = "Connectie gemaakt";
+
+
                 command.ExecuteNonQuery();
+
+
+                Text3.Content = "command gestuurd";
                 connection.Close();
+                Text1.Content = "iets";
             }
             catch (Exception)
             {
+                Text1.Content = "error" ;
                 connection.Close();
             }
 

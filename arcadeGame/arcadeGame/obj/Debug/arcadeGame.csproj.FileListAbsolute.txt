@@ -71,3 +71,10 @@ C:\Users\luukk\source\repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\data\G
 C:\Users\luukk\source\repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\data\GameDataBase_log.ldf
 C:\Users\luukk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameOverScreen.g.cs
 C:\Users\luukk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameOverScreen.baml
+C:\Users\Ruwan\source\repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\data\GameDataBase.mdf
+C:\Users\Ruwan\source\repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\data\GameDataBase_log.ldf
+C:\Users\Ruwan\source\repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\System.Data.SqlClient.dll
+C:\Users\Ruwan\source\repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\System.Data.SqlClient.xml
+C:\Users\Ruwan\source\repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameOverScreen.g.cs
+C:\Users\Ruwan\source\repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameOverScreen.baml
+C:\Users\Ruwan\source\repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.CopyComplete

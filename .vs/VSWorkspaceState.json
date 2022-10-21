@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\arcadeGame",
+    "\\arcadeGame\\arcadeGame"
   ],
-  "SelectedNode": "\\arcadeGame.sln",
+  "SelectedNode": "\\arcadeGame\\arcadeGame\\GameWindow.xaml.cs",
   "PreviewInSolutionExplorer": false
 }
