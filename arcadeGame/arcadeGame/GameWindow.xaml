@@ -44,9 +44,6 @@
         <Label x:Name="scorePlayer2" FontFamily="Impact" Foreground="red" Canvas.Left="726" Canvas.Top="71" HorizontalAlignment="Left" VerticalAlignment="Center">Player 2: 0</Label>
         <Label x:Name="healthShow" Foreground="Red" Canvas.Left="376" Canvas.Top="408" FontFamily="Impact">Health: 3</Label>
 
-        <Label x:Name="scorePlayer1" Foreground="red" Canvas.Left="10" Canvas.Top="71" HorizontalAlignment="Left" VerticalAlignment="Center">Player 1: 0</Label>
-        <Label x:Name="scorePlayer2" Foreground="red" Canvas.Left="726" Canvas.Top="71" HorizontalAlignment="Left" VerticalAlignment="Center">Player 2: 0</Label>
-        <Label x:Name="healthShow" Foreground="Red" Canvas.Left="376" Canvas.Top="408">Health: 3</Label>
 
     </Canvas>
 </Window>

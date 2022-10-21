@@ -22,15 +22,15 @@ namespace arcadeGame
 
 
 
-        private MediaPlayer mediaPlayer = new MediaPlayer();
+        private MediaPlayer media2Player = new MediaPlayer();
 
         public GameOverScreen()
         {
 
 
-            mediaPlayer.Open(new Uri(@"../../assets/kateBush.mp3", UriKind.RelativeOrAbsolute));
-            mediaPlayer.Play();
-            mediaPlayer.Volume = 0.1f;
+            media2Player.Open(new Uri(@"../../assets/kateBush.mp3", UriKind.RelativeOrAbsolute));
+            media2Player.Play();
+            media2Player.Volume = 0.1f;
 
 
             InitializeComponent();
