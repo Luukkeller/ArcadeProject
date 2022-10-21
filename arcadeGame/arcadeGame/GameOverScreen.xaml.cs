@@ -19,8 +19,20 @@ namespace arcadeGame
     /// </summary>
     public partial class GameOverScreen : Window
     {
+
+
+
+        private MediaPlayer mediaPlayer = new MediaPlayer();
+
         public GameOverScreen()
         {
+
+
+            mediaPlayer.Open(new Uri(@"../../assets/kateBush.mp3", UriKind.RelativeOrAbsolute));
+            mediaPlayer.Play();
+            mediaPlayer.Volume = 0.1f;
+
+
             InitializeComponent();
         }
     }
