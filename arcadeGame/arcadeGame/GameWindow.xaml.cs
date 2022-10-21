@@ -51,6 +51,13 @@ namespace arcadeGame
         private ImageBrush bulletSkinBlue = new ImageBrush();
         private ImageBrush bulletSkinGreen = new ImageBrush();
         private ImageBrush bulletSkinYellow = new ImageBrush();
+
+
+        /// Adding new brushes for the player shields
+        private ImageBrush playerShieldBlue = new ImageBrush();
+        private ImageBrush playerShieldGreen = new ImageBrush();
+        private ImageBrush playerShieldYellow = new ImageBrush();
+
         ///Lists for both enemy bullets and player bullets. We need these to be able to loop over all the bullets in the scene.
         private List<Rectangle> enemyBullets = new List<Rectangle>();
         private List<Rectangle> playerBullets = new List<Rectangle>();
@@ -112,9 +119,9 @@ namespace arcadeGame
             bulletSkinGreen.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/glowstickGreen.png"));
             bulletSkinYellow.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/glowstickYellow.png"));
 
-
-
-
+            playerShieldBlue.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/shieldBlue.png"));
+            playerShieldGreen.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/shieldGreen.png"));
+            playerShieldYellow.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/shieldYellow.png"));
         }
 
         private void GameEngine(object sender, EventArgs e)
@@ -127,31 +134,32 @@ namespace arcadeGame
             switch (player1Shield) //Chooses sprite and fills sprite variable with color tag and fills temp colors
             {
                 case 1:
-                    Player1.Stroke = Brushes.Blue;
+                    shield1.Fill = playerShieldBlue;
                     break;
                 case 2:
-                    Player1.Stroke = Brushes.Green;
+                    shield1.Fill = playerShieldGreen;
                     break;
                 case 3:
-                    Player1.Stroke = Brushes.Yellow;
+                    shield1.Fill = playerShieldYellow;
                     break;
             }
             switch (player2Shield) //Chooses sprite and fills sprite variable with color tag and fills temp colors
             {
                 case 1:
-                    Player2.Stroke = Brushes.Blue;
+                    shield2.Fill = playerShieldBlue;
                     break;
                 case 2:
-                    Player2.Stroke = Brushes.Green;
+                    shield2.Fill = playerShieldGreen;
                     break;
                 case 3:
-                    Player2.Stroke = Brushes.Yellow;
+                    shield2.Fill = playerShieldYellow;
                     break;
             }
 
 
 
             PlayerMovement();
+            shieldPlacement();
             PlayerHitDetection(Player1);
             PlayerHitDetection(Player2);
             EnemyHitDetection();
@@ -409,6 +417,14 @@ namespace arcadeGame
         }
 
 
+        ///Martha: Added the placement of the shields for player 1 and 2, they will take placements of the player 1 and 2 and places the shield on the same place.
+        private void shieldPlacement()
+        {
+
+        Canvas.SetLeft(shield1, Canvas.GetLeft(Player1));
+        Canvas.SetLeft(shield2, Canvas.GetLeft(Player2));
+
+        }
 
         /// This accepts a player variable that will then only reference to said player. So if you put in player 1 it compares all the bullets to player 1.
         private void PlayerHitDetection(Rectangle Player)

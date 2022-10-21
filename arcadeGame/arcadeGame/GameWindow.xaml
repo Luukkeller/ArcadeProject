@@ -22,8 +22,27 @@
             Canvas.Top="336" 
             HorizontalAlignment="Center" 
             VerticalAlignment="Top"/>
+        
+        <Rectangle Name="shield1" 
+            Fill="White" 
+            Height="66" 
+            Width="47" 
+            Canvas.Left="336" 
+            Canvas.Top="336" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top"/>
 
         <Rectangle Name="Player2" 
+            Fill="White" 
+            Height="66" 
+            Width="47" 
+            Canvas.Left="424" 
+            Canvas.Top="336" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Center" 
+            ClipToBounds="True" />
+        
+        <Rectangle Name="shield2" 
             Fill="White" 
             Height="66" 
             Width="47" 
