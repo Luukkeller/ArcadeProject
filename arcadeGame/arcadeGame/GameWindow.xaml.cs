@@ -53,7 +53,7 @@ namespace arcadeGame
         private ImageBrush bulletSkinYellow = new ImageBrush();
 
 
-        /// Adding new brushes for the player shields
+        ///Martha: Adding new brushes for the player shields
         private ImageBrush playerShieldBlue = new ImageBrush();
         private ImageBrush playerShieldGreen = new ImageBrush();
         private ImageBrush playerShieldYellow = new ImageBrush();
@@ -115,9 +115,9 @@ namespace arcadeGame
 
             ///Martha Adding the skin for the differend bullets
             bulletSkinPlayer.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/glowstickWhite.png"));
-            bulletSkinBlue.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/glowstickBlue.png"));
-            bulletSkinGreen.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/glowstickGreen.png"));
-            bulletSkinYellow.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/glowstickYellow.png"));
+            bulletSkinBlue.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/OrbBlue.png"));
+            bulletSkinGreen.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/OrbGreen.png"));
+            bulletSkinYellow.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/OrbYellow.png"));
 
             playerShieldBlue.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/shieldBlue.png"));
             playerShieldGreen.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/shieldGreen.png"));
