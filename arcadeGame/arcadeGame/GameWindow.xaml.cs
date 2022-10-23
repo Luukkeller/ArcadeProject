@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Media;
 using System.Net.NetworkInformation;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -76,7 +78,7 @@ namespace arcadeGame
         private int player1Score = 0;
         private int player2Score = 0;
 
-        
+
 
 
         public GameWindow()
@@ -138,7 +140,7 @@ namespace arcadeGame
             }
 
 
-           
+
             PlayerMovement();
             PlayerHitDetection(Player1);
             PlayerHitDetection(Player2);
@@ -693,11 +695,13 @@ namespace arcadeGame
                 isPressed2 = false;
         }
 
+        //function for adding player score and name to database
         private void AddHighscoreToDatabase(int highscore, string playername)
         {
-            string temp = highscore.ToString() + "','Jos','je moeke')";
-            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\Ruwan\\source\\repos\\Luukkeller\\ArcadeProject\\arcadeGame\\arcadeGame\\data\\GameDataBase.mdf\";Integrated Security=True";
-            string query = "INSERT INTO [Highscores] ([Highscore],[Player],[Date]) VALUES ('"+highscore+"','"+playername+"','Vandaag')";
+            //string that stores local DB location
+            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\Luuk\\source\\repos\\ArcadeProject\\arcadeGame\\arcadeGame\\data\\GameDataBase.mdf\";Integrated Security=True;Integrated Security=True";
+            //string that stores t-sql query
+            string query = "INSERT INTO [Highscores] ([Highscore],[Player],[Date]) VALUES ('" + highscore + "','" + playername + "','Vandaag')";
 
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(query);
@@ -706,39 +710,45 @@ namespace arcadeGame
             try
             {
                 command.CommandText = query;
-
-                Text3.Content = "Command erin gegooied";
                 command.CommandType = CommandType.Text;
-
-
-
-                Text3.Content = "command type gezet";
                 command.Connection = connection;
-
-                Text3.Content = "Connectie aangewezen";
-
-                Text2.Content = connection.State.ToString();
                 connection.Open();
-
-                Text2.Content = connection.State.ToString();
-                Text3.Content = "Connectie gemaakt";
-
-
                 command.ExecuteNonQuery();
-
-
-                Text3.Content = "command gestuurd";
                 connection.Close();
-                Text1.Content = "iets";
+
             }
             catch (Exception)
             {
-                Text1.Content = "error" ;
                 connection.Close();
             }
 
         }
 
+       
+        private void LoadTable(object sender, RoutedEventArgs e)
+        {
+            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\Luuk\\source\\repos\\ArcadeProject\\arcadeGame\\arcadeGame\\data\\GameDataBase.mdf\";Integrated Security=True;Integrated Security=True";
+            string query = "select * from Highscores  ";
+            SqlConnection connection = new SqlConnection(connectionString);
 
+            try
+            {
+                SqlCommand command = new SqlCommand(query);
+                command.CommandText = query;
+                command.CommandType = CommandType.Text;
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                connection.Close();
+            }
+        }
+
+        private void HighscoreOpen(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
