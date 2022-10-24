@@ -19,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Xml.Linq;
 using Microsoft.Win32;
 
 
@@ -63,6 +64,9 @@ namespace arcadeGame
         ///The List for enemies. This is required for enemy hit detection.
         private List<Rectangle> enemies = new List<Rectangle>();
 
+        //strings for names game over screen
+        public string name1 = "";
+        public string name2 = "";
 
         //Dict of shield options and current variable of player shield per player.
         private Dictionary<int, string> shield = new Dictionary<int, string>();
@@ -368,6 +372,8 @@ namespace arcadeGame
                             new BitmapImage(new Uri("pack://application:,,,/assets/enemy3.png"));
                         temp = "yellow";
                         break;
+                       
+
                 }
 
 

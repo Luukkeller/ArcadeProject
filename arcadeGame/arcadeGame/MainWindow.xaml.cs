@@ -102,6 +102,7 @@ namespace arcadeGame
             this.Close();
         }
 
+        //Stops the game by clicking quit
         private void QuitClick(object sender, RoutedEventArgs e)
         {
             this.Close();
