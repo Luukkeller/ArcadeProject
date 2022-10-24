@@ -399,24 +399,28 @@ namespace arcadeGame
         ///It stays constrianed to the game window.
         private void PlayerMovement()
         {
-            //Player 1 logic so it can't move outside the game window
-            if (moveLeft1 == true && Canvas.GetLeft(Player1) > 0)
-            {
-                Canvas.SetLeft(Player1, Canvas.GetLeft(Player1) - playerSpeed);
+            if (playerHealth > 0)
+            {//Player 1 logic so it can't move outside the game window
+                if (moveLeft1 == true && Canvas.GetLeft(Player1) > 0)
+                {
+                    Canvas.SetLeft(Player1, Canvas.GetLeft(Player1) - playerSpeed);
+                }
+                if (moveRight1 == true && Canvas.GetLeft(Player1) + 75 < Application.Current.MainWindow.Width)
+                {
+                    Canvas.SetLeft(Player1, Canvas.GetLeft(Player1) + playerSpeed);
+                }
+                // Player 2 logic so it can't move outside the game window
+                if (moveLeft2 == true && Canvas.GetLeft(Player2) > 0)
+                {
+                    Canvas.SetLeft(Player2, Canvas.GetLeft(Player2) - playerSpeed);
+                }
+                if (moveRight2 == true && Canvas.GetLeft(Player2) + 75 < Application.Current.MainWindow.Width)
+                {
+                    Canvas.SetLeft(Player2, Canvas.GetLeft(Player2) + playerSpeed);
+                }
+
             }
-            if (moveRight1 == true && Canvas.GetLeft(Player1) + 75 < Application.Current.MainWindow.Width)
-            {
-                Canvas.SetLeft(Player1, Canvas.GetLeft(Player1) + playerSpeed);
-            }
-            // Player 2 logic so it can't move outside the game window
-            if (moveLeft2 == true && Canvas.GetLeft(Player2) > 0)
-            {
-                Canvas.SetLeft(Player2, Canvas.GetLeft(Player2) - playerSpeed);
-            }
-            if (moveRight2 == true && Canvas.GetLeft(Player2) + 75 < Application.Current.MainWindow.Width)
-            {
-                Canvas.SetLeft(Player2, Canvas.GetLeft(Player2) + playerSpeed);
-            }
+            
         }
 
 
@@ -539,9 +543,10 @@ namespace arcadeGame
                 AddHighscoreToDatabase(player1Score, Player1.Tag.ToString());
                 AddHighscoreToDatabase(player2Score, Player2.Tag.ToString());
                 // close game window when at 0 health and open game over window
-                this.Close(); //close game window on game over
+               
                 HighscoreWindow ScoreData = new HighscoreWindow();
                 ScoreData.Show();
+                this.Close(); //close game window on game over
                 mediaPlayer.Stop(); //stop game theme on game over
                 gameOverOpen = true;
             }
@@ -723,7 +728,7 @@ namespace arcadeGame
         private void AddHighscoreToDatabase(int highscore, string playername)
         {
             //string that stores local DB location
-            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\Luuk\\source\\repos\\ArcadeProject\\arcadeGame\\arcadeGame\\data\\GameDataBase.mdf\";Integrated Security=True;Integrated Security=True";
+            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\luukk\\source\\repos\\ArcadeProject\\arcadeGame\\arcadeGame\\database\\GameDataBase.mdf\";Integrated Security=True";
             //string that stores t-sql query
             string query = "INSERT INTO [Highscores] ([Highscore],[Player],[Date]) VALUES ('" + highscore + "','" + playername + "','Vandaag')";
             SqlConnection connection = new SqlConnection(connectionString);

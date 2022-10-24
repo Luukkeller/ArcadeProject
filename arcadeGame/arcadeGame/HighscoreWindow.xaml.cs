@@ -39,7 +39,7 @@ namespace arcadeGame
         private void FillDataGrid()
         {
             //string containing local database location
-            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\luukk\\Source\\Repos\\ArcadeProject\\arcadeGame\\arcadeGame\\data\\GameDataBase.mdf\"; Integrated Security=True";        
+            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\luukk\\source\\repos\\ArcadeProject\\arcadeGame\\arcadeGame\\database\\GameDataBase.mdf\";Integrated Security=True";        
             string Cmdstring = "SELECT Player, Highscore FROM Highscores ORDER BY Highscore DESC OFFSET 0 ROWS FETCH FIRST 10 ROWS ONLY"; //string containing query that will run on SQL
             SqlConnection connection = new SqlConnection(connectionString); //connecting to database
             {

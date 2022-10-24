@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("database/gamedatabase.mdf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("database/gamedatabase_log.ldf")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/katebush.mp3")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/music.mp3")]
 
