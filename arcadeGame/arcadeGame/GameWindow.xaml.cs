@@ -40,6 +40,7 @@ namespace arcadeGame
 
         private bool isPressed1 = false;
         private bool isPressed2 = false;
+        private bool gameOverOpen = false;
         private const int gameTick = 10;
         private const int playerSpeed = 10;
         private const int bulletSpeed = 10;
@@ -512,14 +513,17 @@ namespace arcadeGame
 
 
             }
-            if (playerHealth <= 0)
+            if (playerHealth <= 0 && !gameOverOpen) //gameOverOpen is set to false and will change to true when this command is executed causing it to only run once
             {
+                //call function to add score to database
                 AddHighscoreToDatabase(player1Score, Player1.Tag.ToString());
                 AddHighscoreToDatabase(player2Score, Player2.Tag.ToString());
-                // replace when we have Gameover screen.
-                MessageBox.Show("player1 score = " + player1Score + " " + "player 2 score = " + player2Score);
-                //gameOver.Show();
-                //this.Hide();
+                // close game window when at 0 health and open game over window
+                this.Close(); //close game window on game over
+                HighscoreWindow ScoreData = new HighscoreWindow();
+                ScoreData.Show();
+                mediaPlayer.Stop(); //stop game theme on game over
+                gameOverOpen = true;
             }
 
             enemyBullets.Remove(bullet);
@@ -702,7 +706,6 @@ namespace arcadeGame
             string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\Luuk\\source\\repos\\ArcadeProject\\arcadeGame\\arcadeGame\\data\\GameDataBase.mdf\";Integrated Security=True;Integrated Security=True";
             //string that stores t-sql query
             string query = "INSERT INTO [Highscores] ([Highscore],[Player],[Date]) VALUES ('" + highscore + "','" + playername + "','Vandaag')";
-
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(query);
 
@@ -724,31 +727,5 @@ namespace arcadeGame
 
         }
 
-       
-        private void LoadTable(object sender, RoutedEventArgs e)
-        {
-            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\Luuk\\source\\repos\\ArcadeProject\\arcadeGame\\arcadeGame\\data\\GameDataBase.mdf\";Integrated Security=True;Integrated Security=True";
-            string query = "select * from Highscores  ";
-            SqlConnection connection = new SqlConnection(connectionString);
-
-            try
-            {
-                SqlCommand command = new SqlCommand(query);
-                command.CommandText = query;
-                command.CommandType = CommandType.Text;
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
-            }
-            catch (Exception)
-            {
-                connection.Close();
-            }
-        }
-
-        private void HighscoreOpen(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
     }
 }

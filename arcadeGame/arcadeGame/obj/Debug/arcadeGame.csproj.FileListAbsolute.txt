@@ -88,7 +88,6 @@ C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\System.
 C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\System.Data.SqlClient.xml
 C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.AssemblyReference.cache
 C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.SuggestedBindingRedirects.cache
-C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameOverScreen.g.cs
 C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameWindow.g.cs
 C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\MainWindow.g.cs
 C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\NameInput.g.cs
@@ -96,7 +95,6 @@ C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\App.g.c
 C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame_Content.g.cs
 C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame_MarkupCompile.cache
 C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame_MarkupCompile.lref
-C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameOverScreen.baml
 C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameWindow.baml
 C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\MainWindow.baml
 C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\NameInput.baml
