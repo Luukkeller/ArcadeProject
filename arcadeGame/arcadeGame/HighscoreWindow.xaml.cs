@@ -19,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Xml.Linq;
 using Microsoft.Win32;
 
 namespace arcadeGame
@@ -48,6 +49,16 @@ namespace arcadeGame
                 sda.Fill(dt);
                 SQLDB.ItemsSource = dt.DefaultView;
             }
+        }
+
+        private void MainMenuClick(object sender, RoutedEventArgs e)
+        {
+            MainWindow gw = new MainWindow();
+            ///Sets the tags of player 1&2 to their respective names
+
+            gw.Visibility = Visibility.Visible;
+            this.Close();
+
         }
     }
 

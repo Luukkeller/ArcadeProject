@@ -9,13 +9,7 @@
     <Grid Margin="612,346,0,0">
         <TextBlock Margin="-256,-327,240,387" Text="HIGHSCORES"></TextBlock>
         <DataGrid Name="SQLDB" Height="230" VerticalAlignment="Top" GridLinesVisibility="None" HorizontalAlignment="Left" Width="172" IsReadOnly="True" Focusable="False" Margin="-301,-308,0,0" />
-        <Button Name="ExitButton" Padding="5" Margin="-514,-54,520,54">
-            <StackPanel Orientation="Horizontal">
-
-                <TextBlock Margin="5,0">Exit</TextBlock>
-            </StackPanel>
-        </Button>
-        <Button Name ="MainMenuButton" Padding="5" Margin="-301,-54,313,54">
+        <Button Name ="MainMenuButton" Padding="5" Margin="-308,-64,320,64" Click="MainMenuClick">
             <StackPanel Orientation="Horizontal">
 
                 <TextBlock Margin="5,0">Main Menu</TextBlock>
