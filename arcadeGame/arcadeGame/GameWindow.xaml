@@ -23,7 +23,26 @@
             HorizontalAlignment="Center" 
             VerticalAlignment="Top"/>
 
+        <Rectangle Name="shield1" 
+            Fill="White" 
+            Height="66" 
+            Width="47" 
+            Canvas.Left="336" 
+            Canvas.Top="336" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top"/>
+
         <Rectangle Name="Player2" 
+            Fill="White" 
+            Height="66" 
+            Width="47" 
+            Canvas.Left="424" 
+            Canvas.Top="336" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Center" 
+            ClipToBounds="True" />
+
+        <Rectangle Name="shield2" 
             Fill="White" 
             Height="66" 
             Width="47" 
@@ -37,12 +56,12 @@
         <Label x:Name="Text2" Canvas.Top="10"/>
         <Label x:Name="Text3" Canvas.Top="20"/>
         <Label x:Name="Text4" Canvas.Top="30"/>
-        <Label x:Name="Text5" FontFamily="Impact" Content="ppppppp" Canvas.Top="50" Canvas.Left="741" Foreground="Red" HorizontalAlignment="Left" VerticalAlignment="Center"  />
-        <Label x:Name="Text6" FontFamily="Impact" Content="ppppppp" Canvas.Top="50" Foreground="Red"  HorizontalAlignment="Left" Canvas.Left="10" VerticalAlignment="Center"/>
+        <Label x:Name="Text5" FontFamily="Impact" Content="ppppppp" Canvas.Top="176" Canvas.Left="741" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top"  />
+        <Label x:Name="Text6" FontFamily="Impact" Content="ppppppp" Canvas.Top="176" Foreground="Red"  HorizontalAlignment="Center" Canvas.Left="10" VerticalAlignment="Top"/>
 
-        <Label x:Name="scorePlayer1" FontFamily="Impact" Foreground="red" Canvas.Left="10" Canvas.Top="71" HorizontalAlignment="Left" VerticalAlignment="Center">Player 1: 0</Label>
-        <Label x:Name="scorePlayer2" FontFamily="Impact" Foreground="red" Canvas.Left="726" Canvas.Top="71" HorizontalAlignment="Left" VerticalAlignment="Center">Player 2: 0</Label>
-        <Label x:Name="healthShow" Foreground="Red" Canvas.Left="376" Canvas.Top="408" FontFamily="Impact">Health: 3</Label>
+        <Label x:Name="scorePlayer1" FontFamily="Impact" Foreground="red" Canvas.Left="10" Canvas.Top="197" HorizontalAlignment="Center" VerticalAlignment="Top">Player 1: 0</Label>
+        <Label x:Name="scorePlayer2" FontFamily="Impact" Foreground="red" Canvas.Left="726" Canvas.Top="197" HorizontalAlignment="Center" VerticalAlignment="Top">Player 2: 0</Label>
+        <Label x:Name="healthShow" Foreground="Red" Canvas.Left="376" Canvas.Top="402" FontFamily="Impact" HorizontalAlignment="Center" VerticalAlignment="Top">Health: 3</Label>
 
 
     </Canvas>
