@@ -59,7 +59,7 @@ namespace arcadeGame
         private ImageBrush bulletSkinGreen = new ImageBrush();
         private ImageBrush bulletSkinYellow = new ImageBrush();
 
-
+        
         ///Martha: Adding new brushes for the player shields
         private ImageBrush playerShieldBlue = new ImageBrush();
         private ImageBrush playerShieldGreen = new ImageBrush();
@@ -436,7 +436,15 @@ namespace arcadeGame
 
             }
             
+
         }
+
+        ///Martha: Added the placement of the shields for player 1 and 2, they will take placements of the player 1 and 2 and places the shield on the same place.
+        private void shieldPlacement()
+        {
+
+            Canvas.SetLeft(shield1, Canvas.GetLeft(Player1));
+            Canvas.SetLeft(shield2, Canvas.GetLeft(Player2));
 
         }
 
