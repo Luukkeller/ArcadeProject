@@ -69,8 +69,6 @@ C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\System
 C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.CopyComplete
 C:\Users\luukk\source\repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\data\GameDataBase.mdf
 C:\Users\luukk\source\repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\data\GameDataBase_log.ldf
-C:\Users\luukk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameOverScreen.g.cs
-C:\Users\luukk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameOverScreen.baml
 C:\Users\Ruwan\source\repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\data\GameDataBase.mdf
 C:\Users\Ruwan\source\repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\data\GameDataBase_log.ldf
 C:\Users\Ruwan\source\repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\System.Data.SqlClient.dll
@@ -107,3 +105,5 @@ C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeG
 C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.pdb
 C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\HighscoreWindow.g.cs
 C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\HighscoreWindow.baml
+C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\HighscoreWindow.g.cs
+C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\HighscoreWindow.baml
