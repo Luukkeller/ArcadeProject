@@ -5,11 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:arcadeGame"
         mc:Ignorable="d"
-        Title="GameOverScreen" Height="450" Width="800"
-        
-           
-
-    >
+        Title="GameOverScreen" Height="469" Width="825" ResizeMode="NoResize">
     <Grid>
 
         <Grid.Background>
@@ -19,7 +15,7 @@
 
         <MediaElement  Name="media2Element" 
      Width="450" Height="250" LoadedBehavior="Manual" UnloadedBehavior="Play" Stretch="Fill"/>
-        <Button x:Name="Try_again" Content="Try again" Margin="270,217,270,172" FontSize="20" Click="TryAgainClick" />
+        <Button x:Name="Try_again" Content="Try again" Margin="270,217,270,0" FontSize="20" Click="TryAgainClick" Height="45" VerticalAlignment="Top"/>
         <Button x:Name="High_Scores" Content="High Scores" Margin="270,278,270,111" FontSize="20" Click="GameOverHS" />
         <Button x:Name="Quit" Content="Quit" Margin="270,340,270,49" FontSize="20" Click="GameOverQuit" />
         <TextBlock HorizontalAlignment="Center" Height="61" Margin="0,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" FontSize="48" FontWeight="Bold" Foreground="#FFE02828" Text="GAME OVER"></TextBlock>

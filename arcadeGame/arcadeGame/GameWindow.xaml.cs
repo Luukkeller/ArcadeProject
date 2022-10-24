@@ -554,8 +554,8 @@ namespace arcadeGame
 
                 AddHighscoreToDatabase(player1Score, Player1.Tag.ToString());
                 AddHighscoreToDatabase(player2Score, Player2.Tag.ToString());
-                ScoreData.TextScore1.Text = "Score " + Player1.Tag.ToString() + ": " + player1Score.ToString();
-                ScoreData.TextScore2.Text = "Score " + Player2.Tag.ToString() + ": " + player2Score.ToString();
+                ScoreData.TextScore1.Text = "Score " + Player1.Tag.ToString() + ": \n " + player1Score.ToString();
+                ScoreData.TextScore2.Text = "Score " + Player2.Tag.ToString() + ": \n " + player2Score.ToString();
                 // close game window when at 0 health and open game over window
 
                 

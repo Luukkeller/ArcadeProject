@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:arcadeGame"
         mc:Ignorable="d"
-        Title="GameWindow" Height="460" Width="810">
+        Title="GameWindow" Height="460" Width="810" ResizeMode="NoResize">
     <Canvas Name="myCanvas" Focusable="True" KeyDown="OnKeyDown" KeyUp="OnKeyUp">
         <Canvas.Background>
             <ImageBrush ImageSource="pack://application:,,,/assets/Background.png"></ImageBrush>
