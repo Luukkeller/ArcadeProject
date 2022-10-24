@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Xml.Linq;
 using Microsoft.Win32;
 
 
@@ -50,6 +51,9 @@ namespace arcadeGame
         ///The List for enemies. This is required for enemy hit detection.
         private List<Rectangle> enemies = new List<Rectangle>();
 
+        //strings for names game over screen
+        public string name1 = "";
+        public string name2 = "";
 
 
         // Spawn enemy variables
@@ -240,6 +244,8 @@ namespace arcadeGame
                             new BitmapImage(new Uri("pack://application:,,,/assets/invader3.gif"));
                         temp = "yellow";
                         break;
+                       
+
                 }
 
 
@@ -393,10 +399,17 @@ namespace arcadeGame
 
             if (playerHealth <= 0)
             {
-                // replace when we have Gameover screen.
-                MessageBox.Show("Game over");
-                //gameOver.Show();
-                //this.Hide();
+                //Opens game over screen
+                Window gos = new Window();
+                gos.Show();
+
+                //Text1.Content = "Player 1: " + name1;
+                //Text2.Content = "Player 2: " + name2;
+
+                //gos.Player1.Tag = name1;
+                //gos.Player2.Tag = name2;
+
+                //gos.Visibility = Visibility.Visible;
             }
 
             enemyBullets.Remove(bullet);

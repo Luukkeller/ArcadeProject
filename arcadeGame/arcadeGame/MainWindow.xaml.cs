@@ -101,6 +101,7 @@ namespace arcadeGame
             gw.Visibility = Visibility.Visible;
         }
 
+        //Stops the game by clicking quit
         private void QuitClick(object sender, RoutedEventArgs e)
         {
             this.Close();

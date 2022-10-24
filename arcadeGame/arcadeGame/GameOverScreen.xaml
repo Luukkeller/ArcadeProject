@@ -7,9 +7,8 @@
         mc:Ignorable="d"
         Title="GameOverScreen" Height="450" Width="800">
     <Grid>
-        <Button x:Name="Try_again" Content="Try again" Margin="270,217,270,172" FontSize="20" />
-        <Button x:Name="High_Scores" Content="High Scores" Margin="270,278,270,111" FontSize="20" />
-        <Button x:Name="Quit" Content="Quit" Margin="270,340,270,49" FontSize="20" />
+        <Button x:Name="High_Scores" Content="High Scores" Margin="270,242,270,147" FontSize="20" />
+        <Button x:Name="Quit" Content="Quit" Margin="270,310,270,79" FontSize="20" />
         <TextBlock HorizontalAlignment="Center" Height="61" Margin="0,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" FontSize="48" FontWeight="Bold"><Run Language="nl-nl" Text="GAME OVER"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="74,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"><Run Language="nl-nl" Text="Score Player1:"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="609,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"><Run Text="Score Player"/><Run Language="nl-nl" Text="2"/><Run Text=":"/></TextBlock>
