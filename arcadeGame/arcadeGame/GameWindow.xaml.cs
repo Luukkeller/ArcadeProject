@@ -400,14 +400,14 @@ namespace arcadeGame
             if (playerHealth <= 0)
             {
                 //Opens game over screen
-                Window gos = new Window();
+                GameOverScreen gos = new GameOverScreen();
                 gos.Show();
 
                 //Text1.Content = "Player 1: " + name1;
                 //Text2.Content = "Player 2: " + name2;
 
-                //gos.Player1.Tag = name1;
-                //gos.Player2.Tag = name2;
+                gos.ScorePlayer1.Text = "Score " + Player1.Tag.ToString() + ": " + player1Score.ToString();
+                gos.ScorePlayer2.Text = "Score " + Player2.Tag.ToString() + ": " + player2Score.ToString();
 
                 //gos.Visibility = Visibility.Visible;
             }
