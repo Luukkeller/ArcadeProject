@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\App.xaml
-4-1261105854
+5-1734483778
 21691371412
-9-415363390
+101286128690
 13-1310406943
-GameOverScreen.xaml;GameWindow.xaml;MainWindow.xaml;NameInput.xaml;
+GameOverScreen.xaml;GameWindow.xaml;HighscoreWindow.xaml;MainWindow.xaml;NameInput.xaml;
 
-True
+False
 
