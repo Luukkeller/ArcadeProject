@@ -145,6 +145,8 @@
     <Resource Include="assets\OrbBlue.png" />
     <Resource Include="assets\OrbGreen.png" />
     <Resource Include="assets\OrbYellow.png" />
+    <Resource Include="assets\KateBush1.png" />
+    <Resource Include="assets\KateBush2.png" />
     <Content Include="database\GameDataBase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

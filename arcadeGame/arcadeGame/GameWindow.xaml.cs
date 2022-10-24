@@ -119,13 +119,6 @@ namespace arcadeGame
 
             myCanvas.Focus();
 
-            // player 1 skin
-            player1Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/strangerThings1.png"));
-            Player1.Fill = player1Skin;
-
-            // player 2 skin
-            player2Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/strangerThings2.png"));
-            Player2.Fill = player2Skin;
             shield.Add(1, "blue");
             shield.Add(2, "green");
             shield.Add(3, "yellow");
@@ -145,6 +138,35 @@ namespace arcadeGame
         {
             Text5.Content = Player1.Tag;
             Text6.Content = Player2.Tag;
+
+            if ((string)Player1.Tag == "Greta" || (string)Player1.Tag == "greta")
+            {
+                //When player 1 name is "Greta" or "greta" skins changes to Kate Bush
+                player1Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/KateBush1.png"));
+                Player1.Fill = player1Skin;
+
+                player2Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/KateBush2.png"));
+                Player2.Fill = player2Skin;
+            }
+            else if ((string)Player2.Tag == "Greta" || (string)Player2.Tag == "greta")
+            {
+                //When player 2 name is "Greta" or "greta" skins changes to Kate Bush
+                player1Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/KateBush1.png"));
+                Player1.Fill = player1Skin;
+
+                player2Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/KateBush2.png"));
+                Player2.Fill = player2Skin;
+            }
+            else
+            {
+                // Normal Player 1 and 2 skins
+                player1Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/strangerThings1.png"));
+                Player1.Fill = player1Skin;
+
+                player2Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/strangerThings2.png"));
+                Player2.Fill = player2Skin;
+
+            }
 
 
             switch (player1Shield) //Chooses sprite and fills sprite variable with color tag and fills temp colors
