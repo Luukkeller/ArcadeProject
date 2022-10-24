@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\arcadeGame",
-    "\\arcadeGame\\arcadeGame"
+    "\\arcadeGame\\arcadeGame",
+    "\\arcadeGame\\arcadeGame\\assets"
   ],
-  "SelectedNode": "\\arcadeGame\\arcadeGame\\GameWindow.xaml.cs",
+  "SelectedNode": "\\arcadeGame\\arcadeGame\\assets\\invader1.gif",
   "PreviewInSolutionExplorer": false
 }
