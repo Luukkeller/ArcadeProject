@@ -99,6 +99,7 @@ namespace arcadeGame
             gw.Player2.Tag = name2;
 
             gw.Visibility = Visibility.Visible;
+            this.Close();
         }
 
         private void QuitClick(object sender, RoutedEventArgs e)

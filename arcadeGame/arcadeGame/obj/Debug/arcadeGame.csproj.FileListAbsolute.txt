@@ -66,6 +66,7 @@ C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcade
 C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.CoreCompileInputs.cache
 C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.exe
 C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.pdb
+<<<<<<< HEAD
 =======
 C:\Users\marth\Source\Repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\assets\music.mp3
 C:\Users\marth\Source\Repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\arcadeGame.exe.config
@@ -94,3 +95,48 @@ C:\Users\marth\Source\Repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\D
 C:\Users\markh\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameOverScreen.g.cs
 C:\Users\markh\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameOverScreen.baml
 >>>>>>> origin/Mark1
+=======
+C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\System.Data.SqlClient.dll
+C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\System.Data.SqlClient.xml
+C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.CopyComplete
+C:\Users\luukk\source\repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\data\GameDataBase.mdf
+C:\Users\luukk\source\repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\data\GameDataBase_log.ldf
+C:\Users\Ruwan\source\repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\data\GameDataBase.mdf
+C:\Users\Ruwan\source\repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\data\GameDataBase_log.ldf
+C:\Users\Ruwan\source\repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\System.Data.SqlClient.dll
+C:\Users\Ruwan\source\repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\System.Data.SqlClient.xml
+C:\Users\Ruwan\source\repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameOverScreen.g.cs
+C:\Users\Ruwan\source\repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameOverScreen.baml
+C:\Users\Ruwan\source\repos\Luukkeller\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.CopyComplete
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\data\GameDataBase.mdf
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\data\GameDataBase_log.ldf
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\assets\music.mp3
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\arcadeGame.exe.config
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\arcadeGame.exe
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\arcadeGame.pdb
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\System.Data.SqlClient.dll
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\bin\Debug\System.Data.SqlClient.xml
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.AssemblyReference.cache
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.SuggestedBindingRedirects.cache
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameWindow.g.cs
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\MainWindow.g.cs
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\NameInput.g.cs
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\App.g.cs
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame_Content.g.cs
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame_MarkupCompile.cache
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame_MarkupCompile.lref
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\GameWindow.baml
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\MainWindow.baml
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\NameInput.baml
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.g.resources
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.Properties.Resources.resources
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.GenerateResource.cache
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.CoreCompileInputs.cache
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.csproj.CopyComplete
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.exe
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\arcadeGame.pdb
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\HighscoreWindow.g.cs
+C:\Users\Luuk\source\repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\HighscoreWindow.baml
+C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\HighscoreWindow.g.cs
+C:\Users\luukk\Source\Repos\ArcadeProject\arcadeGame\arcadeGame\obj\Debug\HighscoreWindow.baml
+>>>>>>> origin/HighscoreSystem
