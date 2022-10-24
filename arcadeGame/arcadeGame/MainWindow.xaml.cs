@@ -107,5 +107,12 @@ namespace arcadeGame
         {
             this.Close();
         }
+
+        private void MainMenuHS(object sender, RoutedEventArgs e)
+        {
+            HighscoreWindow mainmenuHS = new HighscoreWindow();
+            mainmenuHS.Visibility = Visibility.Visible;
+            this.Close();
+        }
     }
 }

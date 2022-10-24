@@ -22,7 +22,7 @@
         <Button Name="Start" Content="Start" Click="StartClick" Height="44" Margin="0,5,5,0" VerticalAlignment="Top" FontSize="20" Grid.Row="1" Grid.Column="1"/>
         <Label Grid.Column="0" Grid.Row="0" x:Name="Text1" Content="" FontSize="30"></Label>
         <Label Grid.Column=" 2 " Grid.Row="0" x:Name="Text2" FontSize="30" Content=""></Label>
-        <Button Grid.Column="1" Name="High_Scores" Content="High Scores" Click="QuitClick" Height="44" Margin="0,65,5,0" VerticalAlignment="Top" FontSize="20" Grid.Row="1"/>
+        <Button Grid.Column="1" Name="High_Scores" Content="High Scores" Click="MainMenuHS" Height="44" Margin="0,65,5,0" VerticalAlignment="Top" FontSize="20" Grid.Row="1"/>
         <Button Grid.Column="1" Name="Quit" Content="Quit" Click="QuitClick" Height="44" Margin="0,125,5,0" VerticalAlignment="Top" FontSize="20" Grid.Row="1"/>
         <TextBlock FontSize="35" Height="50" Margin="262,71,5,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="266" Grid.ColumnSpan="2"><Run Text="Strange "/><Run Text="Invaders"/></TextBlock>
     </Grid>

@@ -21,6 +21,8 @@ namespace arcadeGame
     public partial class GameOverScreen : Window
     {
 
+        public string player1name;
+        public string player2name;
 
 
         private MediaPlayer media2Player = new MediaPlayer();
@@ -37,5 +39,37 @@ namespace arcadeGame
             InitializeComponent();
             
         }
+        public void ReturnToMain(object sender, RoutedEventArgs e)
+        {
+            MainWindow mw = new MainWindow();
+            ///Sets the tags of player 1&2 to their respective names
+
+            mw.Visibility = Visibility.Visible;
+            this.Close();
+        }
+
+        private void TryAgainClick(object sender, RoutedEventArgs e)
+        {
+            GameWindow gw = new GameWindow();
+            ///Sets the tags of player 1&2 to their respective names
+            gw.Player1.Tag = player1name;
+            gw.Player2.Tag = player2name;
+
+            gw.Visibility = Visibility.Visible;
+            this.Close();
+        }
+
+        private void GameOverHS(object sender, RoutedEventArgs e)
+        {
+            HighscoreWindow gameoverHS = new HighscoreWindow();
+            gameoverHS.Visibility = Visibility.Visible;
+            this.Close();
+        }
+
+        private void GameOverQuit(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
+
 }

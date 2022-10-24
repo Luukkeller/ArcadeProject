@@ -51,7 +51,8 @@ namespace arcadeGame
 
         private ImageBrush player1Skin = new ImageBrush();
         private ImageBrush player2Skin = new ImageBrush();
-
+        private string player1Name;
+        private string player2Name;
         ///Martha: Added new brushes for the differend bullet sprites
         private ImageBrush bulletSkinPlayer = new ImageBrush();
         private ImageBrush bulletSkinBlue = new ImageBrush();
@@ -127,7 +128,7 @@ namespace arcadeGame
             bulletSkinBlue.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/glowstickBlue.png"));
             bulletSkinGreen.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/glowstickGreen.png"));
             bulletSkinYellow.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/glowstickYellow.png"));
-
+            
 
 
 
@@ -545,13 +546,19 @@ namespace arcadeGame
             }
             if (playerHealth <= 0 && !gameOverOpen) //gameOverOpen is set to false and will change to true when this command is executed causing it to only run once
             {
+                GameOverScreen ScoreData = new GameOverScreen();
                 //call function to add score to database
+                ScoreData.Show();
+                ScoreData.player1name = Player1.Tag.ToString();
+                ScoreData.player2name = Player2.Tag.ToString();
+
                 AddHighscoreToDatabase(player1Score, Player1.Tag.ToString());
                 AddHighscoreToDatabase(player2Score, Player2.Tag.ToString());
+                ScoreData.TextScore1.Text = "Score " + Player1.Tag.ToString() + ": " + player1Score.ToString();
+                ScoreData.TextScore2.Text = "Score " + Player2.Tag.ToString() + ": " + player2Score.ToString();
                 // close game window when at 0 health and open game over window
-               
-                HighscoreWindow ScoreData = new HighscoreWindow();
-                ScoreData.Show();
+
+                
                 this.Close(); //close game window on game over
                 mediaPlayer.Stop(); //stop game theme on game over
                 gameOverOpen = true;
