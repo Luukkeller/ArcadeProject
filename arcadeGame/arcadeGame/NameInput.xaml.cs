@@ -46,7 +46,11 @@ namespace arcadeGame
             
         }
 
-
+        /// <summary>
+        /// this will run the name input and set them for player 1 and 2
+        /// </summary>
+        /// <param name="sender">the object that reference to the called event</param>
+        /// <param name="e">More information of the object</param>
         private void GameEngine(object sender, EventArgs e)
         {
             //Once we click the names will be set for the specific player (i).
@@ -69,7 +73,11 @@ namespace arcadeGame
 
         }
 
-       
+        /// <summary>
+        /// when you klik on this button it will set x to true and opens up the name input for the second player
+        /// </summary>
+        /// <param name="sender">the object that reference to the called event</param>
+        /// <param name="e">More information of the object</param>
         private void DoneClick(object sender, RoutedEventArgs e)
         {
             x = true;

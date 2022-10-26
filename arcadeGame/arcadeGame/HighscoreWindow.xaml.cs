@@ -34,12 +34,15 @@ namespace arcadeGame
             InitializeComponent();
             FillDataGrid();
         }
-        //Luuk
-        //function that imports sql highscore data into <datagrid Name= SQLDB>
+
+        /// <summary>
+        /// Luuk
+        /// function that imports sql highscore data into <datagrid Name= SQLDB>
+        /// </summary>
         private void FillDataGrid()
         {
             //string containing local database location
-            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\luukk\\source\\repos\\ArcadeProject\\arcadeGame\\arcadeGame\\database\\GameDataBase.mdf\";Integrated Security=True";        
+            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\marth\\source\\Repos\\Luukkeller\\ArcadeProject\\arcadeGame\\arcadeGame\\database\\GameDataBase.mdf\";Integrated Security=True";        
             string Cmdstring = "SELECT Player, Highscore FROM Highscores ORDER BY Highscore DESC OFFSET 0 ROWS FETCH FIRST 10 ROWS ONLY"; //string containing query that will run on SQL
             SqlConnection connection = new SqlConnection(connectionString); //connecting to database
             {
@@ -51,6 +54,11 @@ namespace arcadeGame
             }
         }
 
+        /// <summary>
+        /// when you click on the button Main Menu, it will close this window and opens up Main Window.
+        /// </summary>
+        /// <param name="sender">the object that reference to the called event</param>
+        /// <param name="e">More information of the object</param>
         private void MainMenuClick(object sender, RoutedEventArgs e)
         {
             MainWindow gw = new MainWindow();

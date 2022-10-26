@@ -34,12 +34,14 @@ namespace arcadeGame
         {
 
 
-
+            ///<summary>
+            ///We run a "game engine" so the names on the main window get updated constantly
+            /// </summary>
             InitializeComponent();
 
             ni = new NameInput(this);
 
-            ///We run a "game engine" so the names on the main window get updated constantly
+            
             gameTimer.Interval = TimeSpan.FromMilliseconds(10);
             gameTimer.Tick += GameEngine;
             gameTimer.Start();
@@ -50,7 +52,11 @@ namespace arcadeGame
         }
 
 
-
+        /// <summary>
+        /// set all the details for the Main Menu
+        /// </summary>
+        /// <param name="sender">the object that reference to the called event</param>
+        /// <param name="e">More information of the object</param>
         private void GameEngine(object sender, EventArgs e)
         {
             ///Displays the names of the players on the main window.
@@ -88,7 +94,11 @@ namespace arcadeGame
             
         }
 
-        ///Starts the game when clicked
+        ///<summary>
+        /// Starts the game when clicked
+        /// </summary>
+        /// <param name="sender">the object that reference to the called event</param>
+        /// <param name="e">More information of the object</param>
         private void StartClick(object sender, RoutedEventArgs e)
         {
 
@@ -102,12 +112,21 @@ namespace arcadeGame
             this.Close();
         }
 
-        //Stops the game by clicking quit
+        /// <summary>
+        /// Stops the game by clicking quit
+        /// </summary>
+        /// <param name="sender">the object that reference to the called event</param>
+        /// <param name="e">More information of the object</param>
         private void QuitClick(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Displays the High Score window and closes this window
+        /// </summary>
+        /// <param name="sender">the object that reference to the called event</param>
+        /// <param name="e">More information of the object</param>
         private void MainMenuHS(object sender, RoutedEventArgs e)
         {
             HighscoreWindow mainmenuHS = new HighscoreWindow();

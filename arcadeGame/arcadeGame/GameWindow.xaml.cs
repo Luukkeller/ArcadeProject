@@ -72,16 +72,17 @@ namespace arcadeGame
         ///The List for enemies. This is required for enemy hit detection.
         private List<Rectangle> enemies = new List<Rectangle>();
 
-        //strings for names game over screen
+
+        /// strings for names game over screen
         public string name1 = "";
         public string name2 = "";
 
-        //Dict of shield options and current variable of player shield per player.
+        /// Dict of shield options and current variable of player shield per player.
         private Dictionary<int, string> shield = new Dictionary<int, string>();
         private int player1Shield = 1;
         private int player2Shield = 1;
 
-        // Spawn enemy variables
+        /// Spawn enemy variables
         private Random rand = new Random();
         private int enemySpawnLimit = 200; //Defines the pace of making the enemys
         private int enemySpawnCounter = 0; //Timer for spawning of the enemies
@@ -93,7 +94,7 @@ namespace arcadeGame
         private int enemyTop = 0;
 
         /// Martha: made three ints for player 1 score and player 2 score and player health.
-        private int playerHealth = 3;
+        private int playerHealth = 5;
         private int player1Score = 0;
         private int player2Score = 0;
 
@@ -102,11 +103,9 @@ namespace arcadeGame
 
         public GameWindow()
         {
-            //SoundPlayerAction soundPlayerAction = new SoundPlayerAction();
-            //soundPlayerAction.Source = new Uri(@"../../assets/Enemyhit.mp3", UriKind.RelativeOrAbsolute);
-            //EventTrigger eventTrigger = new EventTrigger(EnemyHitDetection); // this is the event you want to trigger the sound effect.
-            //eventTrigger.Actions.Add(soundPlayerAction);
-
+            ///<summary>
+            /// Making the game see with every tick if something has changed and apply those changes.
+            /// </summary>
             InitializeComponent();
             mediaPlayer.Open(new Uri(@"../../assets/music.mp3", UriKind.RelativeOrAbsolute));
             mediaPlayer.Play();
@@ -134,6 +133,11 @@ namespace arcadeGame
             playerShieldYellow.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/shieldYellow.png"));
         }
 
+        /// <summary>
+        /// Making sure that all within the method is being added or changed when the method that calls GameEnine does a tick
+        /// </summary>
+        /// <param name="sender">the object that reference to the called event</param>
+        /// <param name="e">More information of the object</param>
         private void GameEngine(object sender, EventArgs e)
         {
             Text5.Content = Player1.Tag;
@@ -141,7 +145,7 @@ namespace arcadeGame
 
             if ((string)Player1.Tag == "Greta" || (string)Player1.Tag == "greta")
             {
-                //When player 1 name is "Greta" or "greta" skins changes to Kate Bush
+                ///Martha: When player 1 name is "Greta" or "greta" skins changes to Kate Bush
                 player1Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/KateBush1.png"));
                 Player1.Fill = player1Skin;
 
@@ -150,7 +154,7 @@ namespace arcadeGame
             }
             else if ((string)Player2.Tag == "Greta" || (string)Player2.Tag == "greta")
             {
-                //When player 2 name is "Greta" or "greta" skins changes to Kate Bush
+                ///Martha: When player 2 name is "Greta" or "greta" skins changes to Kate Bush
                 player1Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/KateBush1.png"));
                 Player1.Fill = player1Skin;
 
@@ -159,7 +163,7 @@ namespace arcadeGame
             }
             else
             {
-                // Normal Player 1 and 2 skins
+                /// Normal Player 1 and 2 skins when the name is not Greta or greta
                 player1Skin.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/strangerThings1.png"));
                 Player1.Fill = player1Skin;
 
@@ -168,8 +172,8 @@ namespace arcadeGame
 
             }
 
-
-            switch (player1Shield) //Chooses sprite and fills sprite variable with color tag and fills temp colors
+            ///Chooses sprite and fills sprite variable with color tag and fills temp colors
+            switch (player1Shield) 
             {
                 case 1:
                     shield1.Fill = playerShieldBlue;
@@ -181,7 +185,8 @@ namespace arcadeGame
                     shield1.Fill = playerShieldYellow;
                     break;
             }
-            switch (player2Shield) //Chooses sprite and fills sprite variable with color tag and fills temp colors
+            ///Chooses sprite and fills sprite variable with color tag and fills temp colors
+            switch (player2Shield) 
             {
                 case 1:
                     shield2.Fill = playerShieldBlue;
@@ -205,9 +210,9 @@ namespace arcadeGame
             EnemyAttacks();
 
             ///Timer for enemy attack recharge
-            if (enemyAttackRechargeCooldown > 0) //Makes sure it doesn't count negative
+            if (enemyAttackRechargeCooldown > 0) ///Makes sure it doesn't count negative
             {
-                enemyAttackRechargeCooldown--; //Cuts 1 of the timer
+                enemyAttackRechargeCooldown--; ///Cuts 1 of the timer
             }
             else
             {
@@ -217,11 +222,11 @@ namespace arcadeGame
                     enemyAttackTokens++;
             }
 
-            //player bullets logic
-            //searches for all rectangles in Canvas
+            ///player bullets logic
+            ///searches for all rectangles in Canvas
             foreach (Rectangle x in myCanvas.Children.OfType<Rectangle>())
             {
-                //filters rectangles with bullet1, bullet2 tags
+                ///filters rectangles with bullet1, bullet2 tags
                 if ((string)x.Tag == "bullet1" || (string)x.Tag == "bullet2")
                 {
 
@@ -244,56 +249,69 @@ namespace arcadeGame
             spawnRow1 = true;
             spawnRow2 = true;
 
-            if (enemySpawnCounter > 0) //Makes sure it doesn't count negative
+            ///Makes sure it doesn't count negative
+            if (enemySpawnCounter > 0) 
             {
-                enemySpawnCounter--; //Cuts 1 of the timer
+                ///Cuts 1 of the timer
+                enemySpawnCounter--; 
             }
 
-            if (enemySpawnCounter == 0) //This code is used when the timer is finished
+            ///This code is used when the timer is finished
+            if (enemySpawnCounter == 0) 
             {
 
-                foreach (Rectangle newEnemies in enemies) //Loops through the list enemies en does something with each rectangle
+                ///Loops through the list enemies en does something with each rectangle
+                foreach (Rectangle newEnemies in enemies) 
                 {
 
-
-                    if (Canvas.GetTop(newEnemies) == enemyRow1) //If there are no enemies left in row 1 then this stays true
+                    ///If there are no enemies left in row 1 then this stays true
+                    if (Canvas.GetTop(newEnemies) == enemyRow1) 
                     {
                         spawnRow1 = false;
                     }
-                    if (Canvas.GetTop(newEnemies) == enemyRow2) //If there are no enemies left in row 1 then this stays true
+                    ///If there are no enemies left in row 1 then this stays true
+                    if (Canvas.GetTop(newEnemies) == enemyRow2) 
                     {
                         spawnRow2 = false;
                     }
                 }
-                enemyLeft = 0; //reset placement back to 0
+                ///reset placement back to 0
+                enemyLeft = 0; 
 
                 {
                     if (spawnRow1)
                     {
-                        for (int i = 0; i < enemyAmount + 1; i++) //makes enemyamount enemys
+                        ///makes enemyamount enemys
+                        for (int i = 0; i < enemyAmount + 1; i++) 
                             MakeEnemies(1);
                     }
                 }
-                enemyLeft = 0; //reset placement back to 0
+                ///reset placement back to 0
+                enemyLeft = 0; 
 
                 {
                     if (spawnRow2)
                     {
-                        for (int i = 0; i < enemyAmount; i++) //makes enemyamout enemys
+                        ///makes enemyamout enemys
+                        for (int i = 0; i < enemyAmount; i++) 
                             MakeEnemies(2);
                     }
                 }
 
-                if (spawnRow1 || spawnRow2) //If row1 or row 2 is empty it resets spawnlimit
+                ///If row1 or row 2 is empty it resets spawnlimit
+                if (spawnRow1 || spawnRow2) 
                 {
-                    enemySpawnCounter = enemySpawnLimit; //Resets the enemy counter back to the spawnlimit
+                    ///Resets the enemy counter back to the spawnlimit
+                    enemySpawnCounter = enemySpawnLimit; 
 
                 }
 
             }
         }
 
-
+        /// <summary>
+        /// Checks to see if a bullet spawns on the field and how fast they move.
+        /// </summary>
         private void BulletMovement()
         {
             for (int i = 0; i < enemyBullets.Count; i++)
@@ -310,6 +328,9 @@ namespace arcadeGame
             }
         }
 
+        /// <summary>
+        /// this checks to see if there are enemytokens available, when there is an enemy will attack
+        /// </summary>
         private void EnemyAttacks()
         {
             ///Pulls a random number to decide to attack or not.
@@ -358,7 +379,10 @@ namespace arcadeGame
 
 
 
-
+        /// <summary>
+        /// makes new enemies when the rows are empty
+        /// </summary>
+        /// <param name="row">en int that indicates which row the enemies spawn on</param>
         private void MakeEnemies(int row)
         {
 
@@ -432,8 +456,10 @@ namespace arcadeGame
 
 
 
-        ///Movement for player. Temporarily added up and down to hit the "Bullet" easier.
-        ///It stays constrianed to the game window.
+ 
+        /// <summary>
+        /// checks if the player can move and set the position of the player according to which button is pressed
+        /// </summary>
         private void PlayerMovement()
         {
             if (playerHealth > 0)
@@ -460,8 +486,9 @@ namespace arcadeGame
             
 
         }
-
+        ///<summary>
         ///Martha: Added the placement of the shields for player 1 and 2, they will take placements of the player 1 and 2 and places the shield on the same place.
+        ///</Summary>
         private void shieldPlacement()
         {
 
@@ -470,8 +497,10 @@ namespace arcadeGame
 
         }
 
-
+        ///<summary>
         /// This accepts a player variable that will then only reference to said player. So if you put in player 1 it compares all the bullets to player 1.
+        /// </summary>
+        /// <param name="Player">the rectangle of player 1 or 2 on the canvas</param>
         private void PlayerHitDetection(Rectangle Player)
         {
             ///We loop over each of the bullets.
@@ -511,7 +540,9 @@ namespace arcadeGame
         }
 
 
-
+        /// <summary>
+        /// Loops over the list Enemies and see if the player bullet will hit the enemy
+        /// </summary>
         private void EnemyHitDetection()
         {
             ///We loop over the enemies and for each enemy we check if a bullet is hitting it.
@@ -549,7 +580,6 @@ namespace arcadeGame
                     if (a && b)
                     {
 
-                        //Replace this with EnemyTakeDamage(playerBullets[ii] ,enemies[i]) when not in demo mode.
                         EnemyTakeDamage(playerBullets[ii], enemies[i]);
                         a = false;
                         b = false;
@@ -560,13 +590,17 @@ namespace arcadeGame
             }
 
         }
-
+        ///<summary>
         ///This removes the inserted bullet and executes any other code.
+        /// </summary>
+        /// <param name="bullet">the created rectangle of player bullets</param>
+        /// <param name="damage">the given int of how much the damage will be</param>
+        /// <param name="player">the rechtangle of player 1 or player 2</param>
+
         private void PlayerTakeDamage(Rectangle bullet, int damage, Rectangle player)
         {
             ///Martha: when player takes damage Health goes down by 1.
             ///Once playerHealth reaches 0, it will show you Game over.
-            ///
 
             ///Puts the temp value on the shield of player taking potential damage.
             int temp = 0;
@@ -583,10 +617,11 @@ namespace arcadeGame
 
 
             }
-            if (playerHealth <= 0 && !gameOverOpen) //gameOverOpen is set to false and will change to true when this command is executed causing it to only run once
+            ///gameOverOpen is set to false and will change to true when this command is executed causing it to only run once
+            if (playerHealth <= 0 && !gameOverOpen) 
             {
                 GameOverScreen ScoreData = new GameOverScreen();
-                //call function to add score to database
+                ///call function to add score to database
                 ScoreData.Show();
                 ScoreData.player1name = Player1.Tag.ToString();
                 ScoreData.player2name = Player2.Tag.ToString();
@@ -595,11 +630,22 @@ namespace arcadeGame
                 AddHighscoreToDatabase(player2Score, Player2.Tag.ToString());
                 ScoreData.TextScore1.Text = "Score " + Player1.Tag.ToString() + ": \n " + player1Score.ToString();
                 ScoreData.TextScore2.Text = "Score " + Player2.Tag.ToString() + ": \n " + player2Score.ToString();
-                // close game window when at 0 health and open game over window
-
+                ///Martha: checks which score is higher, than displays which player won
+                if(player1Score > player2Score)
+                {
+                    ScoreData.wins.Text = Player1.Tag.ToString() + " Wins!";
+                }
+                else
+                {
+                    ScoreData.wins.Text = Player2.Tag.ToString() + " Wins!";
+                }
                 
-                this.Close(); //close game window on game over
-                mediaPlayer.Stop(); //stop game theme on game over
+                /// close game window when at 0 health and open game over window
+
+                ///close game window on game over
+                this.Close();
+                ///stop game theme on game over
+                mediaPlayer.Stop();
                 gameOverOpen = true;
             }
 
@@ -608,7 +654,11 @@ namespace arcadeGame
             return;
         }
 
-        ///This removes the inserted bullet and does something with the inserted enemy.
+        ///<summary>
+        /// This removes the inserted bullet and does something with the inserted enemy.
+        /// </summary>
+        /// <param name="bullet">the created rectangle of player bullets</param>
+        /// <param name="Enemy">the created rectangle of the enemy intide the list</param>
         private void EnemyTakeDamage(Rectangle bullet, Rectangle Enemy)
         {
             ///Martha: First it looks at the tag for each of the enemies to assign a temp value for the score
@@ -648,10 +698,14 @@ namespace arcadeGame
 
         }
 
-        ///Movement keys.
+        ///<summary>
+        /// Checks to see if a key is pressed before it will commit an action
+        /// </summary>
+        /// <param name="sender">the object that reference to the called event</param>
+        /// <param name="e">More information of the object</param>
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            //player 1 movement (left or right movement key is pressed)
+            ///player 1 movement (left or right movement key is pressed)
             if (e.Key == Key.A)
             {
                 moveLeft1 = true;
@@ -660,7 +714,7 @@ namespace arcadeGame
             {
                 moveRight1 = true;
             }
-            //player 2 movement (A or D movement key is pressed)
+            ///player 2 movement (A or D movement key is pressed)
             if (e.Key == Key.Left)
             {
                 moveLeft2 = true;
@@ -711,23 +765,22 @@ namespace arcadeGame
                     Width = 10,
                     Fill = bulletSkinPlayer,
                 };
-                //adds player bullet to list
+                ///adds player bullet to list
                 playerBullets.Add(bulletPlayer1);
-                //sets location of bullet above the player vertically
+                ///sets location of bullet above the player vertically
                 Canvas.SetTop(bulletPlayer1, Canvas.GetTop(Player1) - bulletPlayer1.Height);
-                //sets location of bullet above the player horizontally
+                ///sets location of bullet above the player horizontally
                 Canvas.SetLeft(bulletPlayer1, Canvas.GetLeft(Player1) + Player1.Width / 2);
-                //adds bullet to game
+                ///adds bullet to game
                 myCanvas.Children.Add(bulletPlayer1);
-
-                //bullet Player2
 
 
             }
 
             if (e.Key == Key.Up && !isPressed2)
             {
-                isPressed2 = true; //checks if button is pressed so it doesn't spam bullets
+                ///checks if button is pressed so it doesn't spam bullets
+                isPressed2 = true; 
                 Rectangle bulletPlayer2 = new Rectangle
                 {
                     Tag = "bullet2",
@@ -742,16 +795,22 @@ namespace arcadeGame
             }
 
 
-            ///Martha: when you press the Key R on the keyboard it will loop PlayerTakeDamage 3 times and make shows "Game Over"
+            ///Martha: when you press the Key R on the keyboard it will loop PlayerTakeDamage as many times as player Health is set and brings to "Game Over"
             if (e.Key == Key.R)
             {
-                PlayerTakeDamage(Player1, 3, Player1);
+                PlayerTakeDamage(Player1, playerHealth, Player1);
             }
 
         }
+
+        ///<summary>
+        /// Checks to see if a key is released to commit an action
+        /// </summary>
+        /// <param name="sender">the object that reference to the called event</param>
+        /// <param name="e">More information of the object</param>
         private void OnKeyUp(object sender, KeyEventArgs e)
         {
-            //player 1 movement key is released
+            ///player 1 movement key is released
             if (e.Key == Key.A)
             {
                 moveLeft1 = false;
@@ -760,7 +819,7 @@ namespace arcadeGame
             {
                 moveRight1 = false;
             }
-            //player 2 movement key is released
+            ///player 2 movement key is released
             if (e.Key == Key.Left)
             {
                 moveLeft2 = false;
@@ -775,12 +834,15 @@ namespace arcadeGame
             if (isPressed2)
                 isPressed2 = false;
         }
-
-        //function for adding player score and name to database
+        /// <summary>
+        /// function for adding the player scores and names to database for later review
+        /// </summary>
+        /// <param name="highscore">the int of the highscores that are collected during the game</param>
+        /// <param name="playername">the strings of the given names during the name Input</param>
         private void AddHighscoreToDatabase(int highscore, string playername)
         {
             //string that stores local DB location
-            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\luukk\\source\\repos\\ArcadeProject\\arcadeGame\\arcadeGame\\database\\GameDataBase.mdf\";Integrated Security=True";
+            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\marth\\source\\Repos\\Luukkeller\\ArcadeProject\\arcadeGame\\arcadeGame\\database\\GameDataBase.mdf\";Integrated Security=True";
             //string that stores t-sql query
             string query = "INSERT INTO [Highscores] ([Highscore],[Player],[Date]) VALUES ('" + highscore + "','" + playername + "','Vandaag')";
             SqlConnection connection = new SqlConnection(connectionString);

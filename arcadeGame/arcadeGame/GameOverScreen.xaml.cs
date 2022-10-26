@@ -39,6 +39,12 @@ namespace arcadeGame
             InitializeComponent();
             
         }
+
+        /// <summary>
+        /// this will reset the name input and brings you back to the main Menu, closes this window
+        /// </summary>
+        /// <param name="sender">the object that reference to the called event</param>
+        /// <param name="e">More information of the object</param>
         public void ReturnToMain(object sender, RoutedEventArgs e)
         {
             MainWindow mw = new MainWindow();
@@ -48,6 +54,11 @@ namespace arcadeGame
             this.Close();
         }
 
+        /// <summary>
+        /// closes this window and opens the game window, resets the score
+        /// </summary>
+        /// <param name="sender">the object that reference to the called event</param>
+        /// <param name="e">More information of the object</param>
         private void TryAgainClick(object sender, RoutedEventArgs e)
         {
             GameWindow gw = new GameWindow();
@@ -59,6 +70,11 @@ namespace arcadeGame
             this.Close();
         }
 
+        /// <summary>
+        /// opens the Highscore window and closes this window
+        /// </summary>
+        /// <param name="sender">the object that reference to the called event</param>
+        /// <param name="e">More information of the object</param>
         private void GameOverHS(object sender, RoutedEventArgs e)
         {
             HighscoreWindow gameoverHS = new HighscoreWindow();
@@ -66,6 +82,12 @@ namespace arcadeGame
             this.Close();
         }
 
+
+        /// <summary>
+        /// closes this window and therefore the game.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GameOverQuit(object sender, RoutedEventArgs e)
         {
             this.Close();
