@@ -23,6 +23,9 @@ namespace arcadeGame
         public string name1 = "";
         public string name2 = "";
 
+        
+
+
         bool x =true;
 
         private DispatcherTimer gameTimer = new DispatcherTimer();
@@ -38,7 +41,7 @@ namespace arcadeGame
             ///We run a "game engine" so the names on the main window get updated constantly
             /// </summary>
             InitializeComponent();
-
+            //We make a new NameInput window instance and give it the mainwindow so we can get the names back.
             ni = new NameInput(this);
 
             
@@ -46,7 +49,9 @@ namespace arcadeGame
             gameTimer.Tick += GameEngine;
             gameTimer.Start();
 
-
+            //Defines controls on main window
+            Controls1.Text = "Controls: \n W = Shoot \n S = Shield \n A = Left \n D = Right";
+            Controls2.Text = "Controls: \n Up = Shoot \n Down = Shield \n Left = Left \n Right = Right";
 
 
         }
