@@ -56,6 +56,7 @@ namespace arcadeGame
             //Once we click the names will be set for the specific player (i).
             if (x)
             {
+                //If the input waits for player 1 and it hits done we send the name to the mainwindow
                 if (i == 1)
                 {
                     mainWindow.name1 = Input1.Text.ToString();
@@ -63,6 +64,7 @@ namespace arcadeGame
                     x = false;
                 }
 
+                //If the input waits for player 2 and it hits done we send the name to the mainwindow
                 if (i == 2)
                 {
                     mainWindow.name2 = Input1.Text;
